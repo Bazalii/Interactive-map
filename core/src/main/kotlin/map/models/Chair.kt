@@ -5,8 +5,8 @@ import java.util.*
 data class Chair(
     val coordinateX: Double,
     val coordinateY: Double,
-    val legsAmount: Int,
-    var height: Int,
+    val id: UUID,
     val creator: String,
-    val id: UUID
+    var height: Int,
+    val legsAmount: Int,
 )

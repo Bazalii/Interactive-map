@@ -8,10 +8,10 @@ import javax.persistence.Id
 data class ChairDbModel(
     var coordinateX: Double = 0.0,
     var coordinateY: Double = 0.0,
-    val chairLegsAmount: Int = 0,
-    var height: Int = 0,
+    @Id var id: UUID = UUID.randomUUID(),
     val creator: String = "",
-    @Id var id: UUID = UUID.randomUUID()
+    var height: Int = 0,
+    val legsAmount: Int = 0,
 ) {
 
     object ModelMapper {
@@ -19,20 +19,20 @@ data class ChairDbModel(
             Chair(
                 chairDbModel.coordinateX,
                 chairDbModel.coordinateY,
-                chairDbModel.chairLegsAmount,
-                chairDbModel.height,
+                chairDbModel.id,
                 chairDbModel.creator,
-                chairDbModel.id
+                chairDbModel.height,
+                chairDbModel.legsAmount,
             )
 
         fun toChairDbModel(chair: Chair) =
             ChairDbModel(
                 chair.coordinateX,
                 chair.coordinateY,
-                chair.chairLegsAmount,
-                chair.height,
+                chair.id,
                 chair.creator,
-                chair.id
+                chair.height,
+                chair.legsAmount,
             )
     }
 }

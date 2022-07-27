@@ -6,36 +6,37 @@ import javax.persistence.Id
 
 @Entity
 data class TableDbModel(
-    val length: Int = 0,
-    val width: Int = 0,
-    val creator: String = "",
-    val color: String = "",
     val coordinateX: Double = 0.0,
     val coordinateY: Double = 0.0,
-    @Id val id: UUID = UUID.randomUUID()
-
+    @Id val id: UUID = UUID.randomUUID(),
+    val creator: String = "",
+    val length: Int = 0,
+    val width: Int = 0,
+    val color: String = "",
 ) {
     object ModelMapper {
         fun toTable(tableDbModel: TableDbModel) =
             Table(
-                tableDbModel.length,
-                tableDbModel.width,
-                tableDbModel.creator,
-                tableDbModel.color,
                 tableDbModel.coordinateX,
                 tableDbModel.coordinateY,
-                tableDbModel.id
+                tableDbModel.id,
+                tableDbModel.creator,
+                tableDbModel.length,
+                tableDbModel.width,
+                tableDbModel.color,
+
             )
 
         fun toTableDbModel(table: Table) =
             TableDbModel(
-                table.length,
-                table.width,
-                table.creator,
-                table.color,
                 table.coordinateX,
                 table.coordinateY,
-                table.id
+                table.id,
+                table.creator,
+                table.length,
+                table.width,
+                table.color,
+
             )
     }
 }
