@@ -5,7 +5,9 @@ import map.extensions.toChair
 import map.extensions.toChairDbModel
 import map.models.*
 import java.util.*
+import javax.enterprise.context.ApplicationScoped
 
+@ApplicationScoped
 class ChairRepository : PanacheRepository<ChairDbModel> {
     fun save(chair: Chair) {
         persist(chair.toChairDbModel())
@@ -21,7 +23,9 @@ class ChairRepository : PanacheRepository<ChairDbModel> {
 
     fun getAll(): List<Chair> {
         val resList: MutableList<Chair> = mutableListOf()
+
         findAll().list().forEach { resList.add(it.toChair()) }
+
         return resList
     }
 }

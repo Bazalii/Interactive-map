@@ -6,7 +6,9 @@ import map.extensions.toTableDbModel
 import map.models.Table
 import map.models.TableDbModel
 import java.util.*
+import javax.enterprise.context.ApplicationScoped
 
+@ApplicationScoped
 class TableRepository : PanacheRepository<TableDbModel> {
     fun save(table: Table) {
         persist(table.toTableDbModel())
@@ -14,7 +16,9 @@ class TableRepository : PanacheRepository<TableDbModel> {
 
     fun getAll(): List<Table> {
         val tableList: MutableList<Table> = mutableListOf()
+
         findAll().list().forEach { tableList.add(it.toTable()) }
+
         return tableList
     }
 

@@ -2,7 +2,9 @@ package map.repositories
 
 import map.models.*
 import java.util.*
+import javax.enterprise.context.ApplicationScoped
 
+@ApplicationScoped
 class MapRepository(
     private val _chairRepository: ChairRepository,
     private val _wallRepository: WallRepository,
