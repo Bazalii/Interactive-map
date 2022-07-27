@@ -5,7 +5,7 @@ import javax.persistence.Entity
 import javax.persistence.Id
 
 @Entity
-class ChairDbModel(
+data class ChairDbModel(
     var coordinateX: Double = 0.0,
     var coordinateY: Double = 0.0,
     val chairLegsAmount: Int = 0,

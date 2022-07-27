@@ -5,7 +5,7 @@ import javax.persistence.Entity
 import javax.persistence.Id
 
 @Entity
-class WallDbModel(
+data class WallDbModel(
     val length: Int = 0,
     val width: Int = 0,
     val creator: String = "",
