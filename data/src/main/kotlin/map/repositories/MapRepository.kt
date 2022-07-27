@@ -22,28 +22,28 @@ class MapRepository(
         _wallRepository.save(wall)
     }
 
-    override fun deleteTableById(tableId: UUID) {
-        return _tableRepository.deleteById(tableId)
+    override fun deleteTableById(id: UUID) {
+        return _tableRepository.deleteById(id)
     }
 
-    override fun deleteChairById(chairId: UUID) {
-        return _chairRepository.deleteById(chairId)
+    override fun deleteChairById(id: UUID) {
+        return _chairRepository.deleteById(id)
     }
 
-    override fun deleteWallById(wallId: UUID) {
-        return _wallRepository.deleteById(wallId)
+    override fun deleteWallById(id: UUID) {
+        return _wallRepository.deleteById(id)
     }
 
-    override fun getTableById(tableId: UUID): Table {
-        return _tableRepository.getById(tableId)
+    override fun getTableById(id: UUID): Table {
+        return _tableRepository.getById(id)
     }
 
-    override fun getChairById(chairId: UUID): Chair {
-        return _chairRepository.getById(chairId)
+    override fun getChairById(id: UUID): Chair {
+        return _chairRepository.getById(id)
     }
 
-    override fun getWallById(wallId: UUID): Wall {
-        return _wallRepository.getById(wallId)
+    override fun getWallById(id: UUID): Wall {
+        return _wallRepository.getById(id)
     }
 
     override fun getAllTables(): List<Table> {

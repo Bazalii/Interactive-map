@@ -14,12 +14,12 @@ class WallRepository : PanacheRepository<WallDbModel> {
         persist(wall.toWallDbModel())
     }
 
-    fun getById(wallId: UUID): Wall {
-        return list("id", wallId).first().toWall()
+    fun getById(id: UUID): Wall {
+        return list("id", id).first().toWall()
     }
 
-    fun deleteById(wallId: UUID) {
-        delete("id", getById(wallId))
+    fun deleteById(id: UUID) {
+        delete("id", getById(id))
     }
 
     fun getAll(): List<Wall> {

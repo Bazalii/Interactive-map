@@ -14,12 +14,12 @@ class TableRepository : PanacheRepository<TableDbModel> {
         persist(table.toTableDbModel())
     }
 
-    fun getById(tableId: UUID): Table {
-        return list("id", tableId).first().toTable()
+    fun getById(id: UUID): Table {
+        return list("id", id).first().toTable()
     }
 
-    fun deleteById(tableId: UUID) {
-        delete("id", getById(tableId))
+    fun deleteById(id: UUID) {
+        delete("id", getById(id))
     }
 
     fun getAll(): List<Table> {

@@ -13,12 +13,12 @@ class ChairRepository : PanacheRepository<ChairDbModel> {
         persist(chair.toChairDbModel())
     }
 
-    fun getById(chairId: UUID): Chair {
-        return list("id", chairId).first().toChair()
+    fun getById(id: UUID): Chair {
+        return list("id", id).first().toChair()
     }
 
-    fun deleteById(chairId: UUID) {
-        delete("id", getById(chairId))
+    fun deleteById(id: UUID) {
+        delete("id", getById(id))
     }
 
     fun getAll(): List<Chair> {
