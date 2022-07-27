@@ -1,28 +1,27 @@
 package map.repositories
 
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepository
+import map.extensions.toChair
+import map.extensions.toChairDbModel
 import map.models.*
 import java.util.*
 
 class ChairRepository : PanacheRepository<ChairDbModel> {
-    fun saveChair(chair: Chair) {
-        persist(ChairDbModel.ModelMapper.toChairDbModel(chair))
+    fun save(chair: Chair) {
+        persist(chair.toChairDbModel())
     }
 
-    fun getChairById(chairId: UUID): Chair {
-        return ChairDbModel.ModelMapper.toChair(list("id", chairId).first())
+    fun getById(chairId: UUID): Chair {
+        return list("id", chairId).first().toChair()
     }
 
-    fun deleteChairById(chairId: UUID) {
-        delete("id", getChairById(chairId))
+    fun deleteById(chairId: UUID) {
+        delete("id", getById(chairId))
     }
 
-    fun getAllChairs(): List<Chair> {
-        val list = findAll().list()
-        val tableList: MutableList<Chair> = mutableListOf()
-        for (model in list) {
-            tableList.add(ChairDbModel.ModelMapper.toChair(model))
-        }
-        return tableList
+    fun getAll(): List<Chair> {
+        val resList: MutableList<Chair> = mutableListOf()
+        findAll().list().forEach { resList.add(it.toChair()) }
+        return resList
     }
 }

@@ -1,31 +1,28 @@
 package map.repositories
 
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepository
+import map.extensions.toTable
+import map.extensions.toTableDbModel
 import map.models.Table
 import map.models.TableDbModel
 import java.util.*
 
 class TableRepository : PanacheRepository<TableDbModel> {
-    fun saveTable(table: Table) {
-        persist(TableDbModel.ModelMapper.toTableDbModel(table))
+    fun save(table: Table) {
+        persist(table.toTableDbModel())
     }
 
-    fun getAllTables(): List<Table> {
-        val list = findAll().list()
+    fun getAll(): List<Table> {
         val tableList: MutableList<Table> = mutableListOf()
-        for (model in list) {
-            tableList.add(TableDbModel.ModelMapper.toTable(model))
-        }
+        findAll().list().forEach { tableList.add(it.toTable()) }
         return tableList
     }
 
-    fun getTableById(tableId: UUID): Table {
-        return TableDbModel.ModelMapper.toTable(list("id", tableId).first())
+    fun getById(tableId: UUID): Table {
+        return list("id", tableId).first().toTable()
     }
 
-    fun deleteTableById(tableId: UUID) {
-        delete("id", getTableById(tableId))
+    fun deleteById(tableId: UUID) {
+        delete("id", getById(tableId))
     }
-
-
 }

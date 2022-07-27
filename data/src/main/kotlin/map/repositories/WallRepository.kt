@@ -1,29 +1,28 @@
 package map.repositories
 
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepository
+import map.extensions.toWall
+import map.extensions.toWallDbModel
 import map.models.Wall
 import map.models.WallDbModel
 import java.util.*
 
 class WallRepository : PanacheRepository<WallDbModel> {
-    fun saveWall(wall: Wall) {
-        persist(WallDbModel.ModelMapper.toWallDbModel(wall))
+    fun save(wall: Wall) {
+        persist(wall.toWallDbModel())
     }
 
-    fun getWallById(wallId: UUID): Wall {
-        return WallDbModel.ModelMapper.toWall(list("id", wallId).first())
+    fun getById(wallId: UUID): Wall {
+        return list("id", wallId).first().toWall()
     }
 
-    fun deleteWallById(wallId: UUID) {
-        delete("id", getWallById(wallId))
+    fun deleteById(wallId: UUID) {
+        delete("id", getById(wallId))
     }
 
-    fun getAllWalls(): List<Wall> {
-        val list = findAll().list()
+    fun getAll(): List<Wall> {
         val tableList: MutableList<Wall> = mutableListOf()
-        for (model in list) {
-            tableList.add(WallDbModel.ModelMapper.toWall(model))
-        }
+        findAll().list().forEach { tableList.add(it.toWall()) }
         return tableList
     }
 }

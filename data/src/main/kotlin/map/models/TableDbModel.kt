@@ -13,30 +13,4 @@ data class TableDbModel(
     val length: Int = 0,
     val width: Int = 0,
     val color: String = "",
-) {
-    object ModelMapper {
-        fun toTable(tableDbModel: TableDbModel) =
-            Table(
-                tableDbModel.coordinateX,
-                tableDbModel.coordinateY,
-                tableDbModel.id,
-                tableDbModel.creator,
-                tableDbModel.length,
-                tableDbModel.width,
-                tableDbModel.color,
-
-            )
-
-        fun toTableDbModel(table: Table) =
-            TableDbModel(
-                table.coordinateX,
-                table.coordinateY,
-                table.id,
-                table.creator,
-                table.length,
-                table.width,
-                table.color,
-
-            )
-    }
-}
+)

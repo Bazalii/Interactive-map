@@ -12,27 +12,4 @@ data class ChairDbModel(
     val creator: String = "",
     var height: Int = 0,
     val legsAmount: Int = 0,
-) {
-
-    object ModelMapper {
-        fun toChair(chairDbModel: ChairDbModel) =
-            Chair(
-                chairDbModel.coordinateX,
-                chairDbModel.coordinateY,
-                chairDbModel.id,
-                chairDbModel.creator,
-                chairDbModel.height,
-                chairDbModel.legsAmount,
-            )
-
-        fun toChairDbModel(chair: Chair) =
-            ChairDbModel(
-                chair.coordinateX,
-                chair.coordinateY,
-                chair.id,
-                chair.creator,
-                chair.height,
-                chair.legsAmount,
-            )
-    }
-}
+)

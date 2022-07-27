@@ -4,55 +4,55 @@ import map.models.*
 import java.util.*
 
 class MapRepository(
-    private val chairRepository: ChairRepository,
-    private val wallRepository: WallRepository,
-    private val tableRepository: TableRepository,
+    private val _chairRepository: ChairRepository,
+    private val _wallRepository: WallRepository,
+    private val _tableRepository: TableRepository,
 ) : IMapRepository {
     override fun saveTable(table: Table) {
-        tableRepository.saveTable(table)
+        _tableRepository.save(table)
     }
 
     override fun saveChair(chair: Chair) {
-        chairRepository.saveChair(chair)
+        _chairRepository.save(chair)
     }
 
     override fun saveWall(wall: Wall) {
-        wallRepository.saveWall(wall)
+        _wallRepository.save(wall)
     }
 
     override fun deleteTableById(tableId: UUID) {
-        return tableRepository.deleteTableById(tableId)
+        return _tableRepository.deleteById(tableId)
     }
 
     override fun deleteChairById(chairId: UUID) {
-        return chairRepository.deleteChairById(chairId)
+        return _chairRepository.deleteById(chairId)
     }
 
     override fun deleteWallById(wallId: UUID) {
-        return wallRepository.deleteWallById(wallId)
+        return _wallRepository.deleteById(wallId)
     }
 
     override fun getTableById(tableId: UUID): Table {
-        return tableRepository.getTableById(tableId)
+        return _tableRepository.getById(tableId)
     }
 
     override fun getChairById(chairId: UUID): Chair {
-        return chairRepository.getChairById(chairId)
+        return _chairRepository.getById(chairId)
     }
 
     override fun getWallById(wallId: UUID): Wall {
-        return wallRepository.getWallById(wallId)
+        return _wallRepository.getById(wallId)
     }
 
     override fun getAllTables(): List<Table> {
-        return tableRepository.getAllTables()
+        return _tableRepository.getAll()
     }
 
     override fun getAllChairs(): List<Chair> {
-        return chairRepository.getAllChairs()
+        return _chairRepository.getAll()
     }
 
     override fun getAllWalls(): List<Wall> {
-        return wallRepository.getAllWalls()
+        return _wallRepository.getAll()
     }
 }
