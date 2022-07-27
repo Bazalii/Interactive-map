@@ -14,19 +14,19 @@ class TableRepository : PanacheRepository<TableDbModel> {
         persist(table.toTableDbModel())
     }
 
-    fun getAll(): List<Table> {
-        val tableList: MutableList<Table> = mutableListOf()
-
-        findAll().list().forEach { tableList.add(it.toTable()) }
-
-        return tableList
-    }
-
     fun getById(tableId: UUID): Table {
         return list("id", tableId).first().toTable()
     }
 
     fun deleteById(tableId: UUID) {
         delete("id", getById(tableId))
+    }
+
+    fun getAll(): List<Table> {
+        val tableList: MutableList<Table> = mutableListOf()
+
+        findAll().list().forEach { tableList.add(it.toTable()) }
+
+        return tableList
     }
 }
