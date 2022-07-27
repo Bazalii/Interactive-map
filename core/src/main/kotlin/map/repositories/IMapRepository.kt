@@ -18,5 +18,4 @@ interface IMapRepository {
     fun getAllTables(): List<Table>
     fun getAllChairs(): List<Chair>
     fun getAllWalls(): List<Wall>
-
 }
