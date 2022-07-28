@@ -5,60 +5,60 @@ import map.models.Table
 import map.models.Wall
 import map.repositories.IMapRepository
 import map.services.IMapService
-import java.util.*
+import java.util.UUID
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
-class MapService(
-    private val repository: IMapRepository,
-) : IMapService {
+class MapService (
+    private val _repository: IMapRepository,
+        ) : IMapService {
 
 
     override fun saveTable(table: Table) {
-        repository.saveTable(table)
+        _repository.saveTable(table)
     }
 
     override fun saveChair(chair: Chair) {
-        repository.saveChair(chair)
+        _repository.saveChair(chair)
     }
 
     override fun saveWall(wall: Wall) {
-        repository.saveWall(wall)
+        _repository.saveWall(wall)
     }
 
-    override fun deleteTableById(tableId: UUID) {
-        repository.deleteTableById(tableId)
+    override fun deleteTableById(id: UUID) {
+        _repository.deleteTableById(id)
     }
 
-    override fun deleteChairById(chairId: UUID) {
-        repository.deleteChairById(chairId)
+    override fun deleteChairById(id: UUID) {
+        _repository.deleteChairById(id)
     }
 
-    override fun deleteWallById(wallId: UUID) {
-        repository.deleteWallById(wallId)
+    override fun deleteWallById(id: UUID) {
+        _repository.deleteWallById(id)
     }
 
-    override fun getTableById(tableId: UUID): Table {
-        return repository.getTableById(tableId)
+    override fun getTableById(id: UUID): Table {
+        return _repository.getTableById(id)
     }
 
-    override fun getChairById(chairId: UUID): Chair {
-        return repository.getChairById(chairId)
+    override fun getChairById(id: UUID): Chair {
+        return _repository.getChairById(id)
     }
 
-    override fun getWallById(wallId: UUID): Wall {
-        return repository.getWallById(wallId)
+    override fun getWallById(id: UUID): Wall {
+        return _repository.getWallById(id)
     }
 
     override fun getAllTables(): List<Table> {
-        return repository.getAllTables()
+        return _repository.getAllTables()
     }
 
     override fun getAllChairs(): List<Chair> {
-        return repository.getAllChairs()
+        return _repository.getAllChairs()
     }
 
     override fun getAllWalls(): List<Wall> {
-        return repository.getAllWalls()
+        return _repository.getAllWalls()
     }
 }
