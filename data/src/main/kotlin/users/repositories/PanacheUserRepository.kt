@@ -12,18 +12,19 @@ class PanacheUserRepository : PanacheRepository<UserDbModel> {
         persist(user.toUserDbModel())
     }
 
-    fun getById(userId: UUID): User {
-        return list("id", userId).first().toUser()
+    fun deleteById(id: UUID) {
+        delete("id", getById(id))
     }
 
-    fun deleteById(userId: UUID) {
-        delete("id", getById(userId))
+    fun getById(id: UUID): User {
+        return list("id", id).first().toUser()
     }
 
     fun getAll(): List<User> {
         val userList: MutableList<User> = mutableListOf()
-        findAll().list().forEach { userList.add(it.toUser()) }
-        return userList
 
+        findAll().list().forEach { userList.add(it.toUser()) }
+
+        return userList
     }
 }
