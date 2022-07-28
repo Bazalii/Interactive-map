@@ -2,7 +2,7 @@ package users.models
 
 import java.util.UUID
 
-class User(
+data class User(
     val name: String,
     val surname: String,
     val nickname: String,
