@@ -15,7 +15,7 @@ class UserRepositoryTests {
     private val repository = UserRepository(panacheRepository)
 
     @Test
-    fun saveTest() {
+    fun saveUser_SuccessPath_SaveInPanacheRepositoryIsCalled() {
         // ARRANGE
         val user = User("test", "test", "nickname", UUID.randomUUID())
 
@@ -27,7 +27,7 @@ class UserRepositoryTests {
     }
 
     @Test
-    fun deleteByIdTest() {
+    fun deleteUserById_SuccessPath_DeleteInPanacheRepositoryIsCalled() {
         // ARRANGE
         val user = User("test", "test", "nickname", UUID.randomUUID())
 
@@ -40,7 +40,7 @@ class UserRepositoryTests {
     }
 
     @Test
-    fun getByIdTest() {
+    fun getUserById_SuccessPath_ReturnsRequiredUser() {
         // ARRANGE
         val user = User("test", "test", "nickname", UUID.randomUUID())
 
@@ -52,7 +52,7 @@ class UserRepositoryTests {
     }
 
     @Test
-    fun getAllTest() {
+    fun getAllUsers_SuccessPath_ReturnsActualList() {
         // ARRANGE
         val user = User("test", "test", "nickname", UUID.randomUUID())
 
