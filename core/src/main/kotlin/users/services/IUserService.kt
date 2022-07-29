@@ -5,19 +5,19 @@ import users.models.User
 import java.util.*
 
 interface IUserService {
-    fun findUser(id: UUID): User?
+    fun find(id: UUID): User?
 
-    fun saveUser(user: User)
+    fun save(user: User)
 
-    fun deleteUserById(id: UUID)
+    fun delete(id: UUID)
 
-    fun findAllUsers(): List<User>?
+    fun findAll(): List<User>?
 
     fun createSuperUser(user: User)
 
     fun deleteSuperUserById(id: UUID)
 
-    fun changeNickName(user: User, newNickName: String)
+    fun changeNickname(user: User, newNickName: String)
 
     fun changeRole(changedUser: User, superUser: User)
 }
