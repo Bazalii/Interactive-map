@@ -21,7 +21,7 @@ class MapRepositoryTests {
     private val mapRepository = MapRepository(chairRepository, wallRepository, tableRepository)
 
     @Test
-    fun saveChairs_RightAmountOfInteractionsOfSaveMethod() {
+    fun saveChair_SuccessPath_SaveInPanacheRepositoryIsCalled() {
         // ARRANGE
         val firstChair = Chair(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2)
 
@@ -29,12 +29,12 @@ class MapRepositoryTests {
         mapRepository.saveChair(firstChair)
 
         // ASSERT
-        verify(chairRepository, times(1)).save(any())
+        verify(chairRepository, times(1)).save(firstChair)
     }
 
 
     @Test
-    fun saveTables_RightAmountOfInteractionsOfSaveMethod() {
+    fun saveTable_SavingTwoTables_SuccessPath_SaveInPanacheRepositoryIsCalledThreeTimes() {
         // ARRANGE
         val firstTable = Table(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2, "red")
         val secondTable = Table(1.0, 2.0, UUID.randomUUID(), "tima", 2, 3, "red")
@@ -44,11 +44,12 @@ class MapRepositoryTests {
         mapRepository.saveTable(secondTable)
 
         // ASSERT
-        verify(tableRepository, times(2)).save(any())
+        verify(tableRepository, times(1)).save(firstTable)
+        verify(tableRepository, times(1)).save(secondTable)
     }
 
     @Test
-    fun saveWalls_VerifyRightAmountOfInteractionsOfSaveMethod() {
+    fun saveWall_SaveThreeWalls_SuccessPath_SaveInPanacheRepositoryIsCalledThreeTimes() {
         // ARRANGE
         val firstWall = Wall(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2)
         val secondWall = Wall(1.0, 2.0, UUID.randomUUID(), "tima", 2, 3)
@@ -60,11 +61,13 @@ class MapRepositoryTests {
         mapRepository.saveWall(thirdWall)
 
         // ASSERT
-        verify(wallRepository, times(3)).save(any())
+        verify(wallRepository, times(1)).save(firstWall)
+        verify(wallRepository, times(1)).save(secondWall)
+        verify(wallRepository, times(1)).save(thirdWall)
     }
 
     @Test
-    fun deleteChair_DeleteMethodCalledOnce() {
+    fun deleteChair_SuccessPath_DeleteInPanacheRepositoryIsCalled() {
         // ARRANGE
         val chair = Chair(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2)
 
@@ -77,7 +80,7 @@ class MapRepositoryTests {
     }
 
     @Test
-    fun deleteTable_DeleteMethodCalledOnce() {
+    fun deleteTable_SuccessPath_DeleteInPanacheRepositoryIsCalled()  {
         // ARRANGE
         val table = Table(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2, "red")
 
@@ -90,7 +93,7 @@ class MapRepositoryTests {
     }
 
     @Test
-    fun deleteWall_DeleteMethodCalledOnce() {
+    fun deleteWall_SuccessPath_DeleteInPanacheRepositoryIsCalled() {
         // ARRANGE
         val wall = Wall(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2)
 
@@ -103,7 +106,7 @@ class MapRepositoryTests {
     }
 
     @Test
-    fun getChairById_ReturnsCorrectTable() {
+    fun getChairById_SuccessPath_ReturnsCorrespondingChair() {
         // ARRANGE
         val chair = Chair(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2)
 
@@ -115,7 +118,7 @@ class MapRepositoryTests {
     }
 
     @Test
-    fun getTableById_ReturnsCorrectTable() {
+    fun getTableById_SuccessPath_ReturnsCorrespondingTable() {
         // ARRANGE
         val table = Table(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2, "red")
 
@@ -127,7 +130,7 @@ class MapRepositoryTests {
     }
 
     @Test
-    fun getWallById_ReturnsCorrectTable() {
+    fun getWallById_SuccessPath_ReturnsCorrespondingTable() {
         // ARRANGE
         val wall = Wall(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2)
 
@@ -140,7 +143,7 @@ class MapRepositoryTests {
 
 
     @Test
-    fun getAllChairsListCount_ReturnsActualCount() {
+    fun getAllChairsListCount_SuccessPath_ReturnsActualList() {
         // ARRANGE
         val chair = Chair(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2)
 
@@ -148,11 +151,11 @@ class MapRepositoryTests {
         whenever(chairRepository.getAll()).thenReturn(listOf(chair))
 
         // ASSERT
-        Assertions.assertEquals(mapRepository.getAllChairs().count(), 1)
+        Assertions.assertEquals(mapRepository.getAllChairs(), listOf(chair))
     }
 
     @Test
-    fun getAllTablesListCount_ReturnsActualCount() {
+    fun getAllTables_SuccessPath_ReturnsActualList() {
         // ARRANGE
         val table = Table(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2, "red")
 
@@ -160,11 +163,11 @@ class MapRepositoryTests {
         whenever(tableRepository.getAll()).thenReturn(listOf(table))
 
         // ASSERT
-        Assertions.assertEquals(mapRepository.getAllTables().count(), 1)
+        Assertions.assertEquals(mapRepository.getAllTables(), listOf(table))
     }
 
     @Test
-    fun getAllWallsListCount_ReturnsActualCount() {
+    fun getAllWallsListCount_SuccessPath_ReturnsActualList() {
         // ARRANGE
         val wall = Wall(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2) // ACT
 
@@ -172,6 +175,6 @@ class MapRepositoryTests {
         whenever(wallRepository.getAll()).thenReturn(listOf(wall))
 
         // ASSERT
-        Assertions.assertEquals(mapRepository.getAllWalls().count(), 1)
+        Assertions.assertEquals(mapRepository.getAllWalls(), listOf(wall))
     }
 }
