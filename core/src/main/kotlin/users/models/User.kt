@@ -7,5 +7,5 @@ data class User(
     val surname: String,
     var nickname: String,
     var role: Role = Role.USER,
-    val id: UUID
+    val id: UUID = UUID.randomUUID()
 )
