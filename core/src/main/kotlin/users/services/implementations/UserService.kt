@@ -10,19 +10,19 @@ import javax.enterprise.context.ApplicationScoped
 @ApplicationScoped
 class UserService(private val _userRepository: IUserRepository) : IUserService {
 
-    override fun findUser(id: UUID): User {
+    override fun find(id: UUID): User {
         return _userRepository.getById(id)
     }
 
-    override fun saveUser(user: User) {
+    override fun save(user: User) {
         _userRepository.save(user)
     }
 
-    override fun deleteUserById(id: UUID) {
+    override fun delete(id: UUID) {
         _userRepository.deleteById(id)
     }
 
-    override fun findAllUsers(): List<User> {
+    override fun findAll(): List<User> {
         return _userRepository.getAll()
     }
 
@@ -34,7 +34,7 @@ class UserService(private val _userRepository: IUserRepository) : IUserService {
         _userRepository.deleteById(id)
     }
 
-    override fun changeNickName(user: User, newNickName: String) {
+    override fun changeNickname(user: User, newNickName: String) {
         user.nickname = newNickName
     }
 
