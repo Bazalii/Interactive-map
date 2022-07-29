@@ -11,53 +11,55 @@ import java.util.*
 
 @QuarkusTest
 class UserRepositoryTests {
-    private val userPanacheRepository: PanacheUserRepository = mock()
-    private val userRepository = UserRepository(userPanacheRepository)
+    private val panacheRepository: PanacheUserRepository = mock()
+    private val repository = UserRepository(panacheRepository)
 
     @Test
-    fun saveUserTest(){
+    fun saveTest() {
         // ARRANGE
         val user = User("test", "test", "nickname", UUID.randomUUID())
 
         // ACT
-        userRepository.save(user)
+        repository.save(user)
 
         // ASSERT
-        verify(userRepository, times(1)).save(user)
+        verify(repository, times(1)).save(user)
     }
 
     @Test
-    fun deleteUserByIdTest(){
+    fun deleteByIdTest() {
         // ARRANGE
         val user = User("test", "test", "nickname", UUID.randomUUID())
 
         // ACT
-        userRepository.save(user)
-        userRepository.deleteById(user.id)
+        repository.save(user)
+        repository.deleteById(user.id)
 
         // ASSERT
-        verify(userPanacheRepository, times(1)).deleteById(user.id)
+        verify(panacheRepository, times(1)).deleteById(user.id)
     }
+
     @Test
-    fun getUserByIdTest(){
+    fun getByIdTest() {
         // ARRANGE
         val user = User("test", "test", "nickname", UUID.randomUUID())
 
         // ACT
-        whenever(userRepository.getById(user.id)).thenReturn(user)
+        whenever(repository.getById(user.id)).thenReturn(user)
 
         // ASSERT
-        Assertions.assertEquals(userRepository.getById(user.id), user)
+        Assertions.assertEquals(repository.getById(user.id), user)
     }
+
     @Test
-    fun getAllUsersTest(){
+    fun getAllTest() {
         // ARRANGE
         val user = User("test", "test", "nickname", UUID.randomUUID())
 
         // ACT
-        whenever(userPanacheRepository.getAll()).thenReturn(listOf(user))
+        whenever(panacheRepository.getAll()).thenReturn(listOf(user))
 
         // ASSERT
-        Assertions.assertEquals(userRepository.getAll(), listOf(user))
+        Assertions.assertEquals(repository.getAll(), listOf(user))
     }
 }
