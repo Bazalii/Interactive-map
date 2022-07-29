@@ -34,7 +34,7 @@ class MapRepositoryTests {
 
 
     @Test
-    fun saveTable_SavingTwoTables_SuccessPath_SaveInPanacheRepositoryIsCalledThreeTimes() {
+    fun saveTable_SavingTwoTables_SuccessPath_SaveInPanacheRepositoryIsCalledTwoTimes() {
         // ARRANGE
         val firstTable = Table(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2, "red")
         val secondTable = Table(1.0, 2.0, UUID.randomUUID(), "tima", 2, 3, "red")
