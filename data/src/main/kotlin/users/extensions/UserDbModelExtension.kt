@@ -7,5 +7,6 @@ fun UserDbModel.toUser() = User(
     name,
     surname,
     nickname,
+    role,
     id
 )

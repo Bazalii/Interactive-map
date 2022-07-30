@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import users.repositories.PanacheUserRepository
 import org.mockito.kotlin.*
+import users.models.Role
 import users.models.User
 import users.repositories.UserRepository
 import java.util.*
@@ -17,7 +18,7 @@ class UserRepositoryTests {
     @Test
     fun saveUser_SuccessPath_SaveInPanacheRepositoryIsCalled() {
         // ARRANGE
-        val user = User("test", "test", "nickname", UUID.randomUUID())
+        val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
 
         // ACT
         repository.save(user)
@@ -29,7 +30,7 @@ class UserRepositoryTests {
     @Test
     fun deleteUserById_SuccessPath_DeleteInPanacheRepositoryIsCalled() {
         // ARRANGE
-        val user = User("test", "test", "nickname", UUID.randomUUID())
+        val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
 
         // ACT
         repository.save(user)
@@ -42,7 +43,7 @@ class UserRepositoryTests {
     @Test
     fun getUserById_SuccessPath_ReturnsRequiredUser() {
         // ARRANGE
-        val user = User("test", "test", "nickname", UUID.randomUUID())
+        val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
 
         // ACT
         whenever(repository.getById(user.id)).thenReturn(user)
@@ -54,7 +55,7 @@ class UserRepositoryTests {
     @Test
     fun getAllUsers_SuccessPath_ReturnsActualList() {
         // ARRANGE
-        val user = User("test", "test", "nickname", UUID.randomUUID())
+        val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
 
         // ACT
         whenever(panacheRepository.getAll()).thenReturn(listOf(user))
