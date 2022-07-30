@@ -1,6 +1,5 @@
 package users.services
 
-import map.models.Table
 import users.models.User
 import java.util.*
 
