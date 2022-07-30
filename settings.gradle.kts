@@ -16,5 +16,6 @@ rootProject.name = "map-test-project"
 include(
     ":data",
     ":core",
-    ":web"
+    ":web",
+    ":tests"
 )
