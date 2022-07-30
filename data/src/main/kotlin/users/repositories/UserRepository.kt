@@ -2,7 +2,9 @@ package users.repositories
 
 import users.models.User
 import java.util.*
+import javax.enterprise.context.ApplicationScoped
 
+@ApplicationScoped
 class UserRepository(
     private val _userRepository: PanacheUserRepository
 ) : IUserRepository {
