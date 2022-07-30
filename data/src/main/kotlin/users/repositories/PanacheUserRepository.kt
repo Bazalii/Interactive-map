@@ -6,7 +6,9 @@ import users.extensions.toUserDbModel
 import users.models.User
 import users.models.UserDbModel
 import java.util.*
+import javax.enterprise.context.ApplicationScoped
 
+@ApplicationScoped
 class PanacheUserRepository : PanacheRepository<UserDbModel> {
     fun save(user: User) {
         persist(user.toUserDbModel())
