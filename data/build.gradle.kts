@@ -18,6 +18,7 @@ dependencies {
     testImplementation("org.mockito:mockito-inline:4.6.1")
     implementation("io.quarkus:quarkus-test-h2")
     implementation("io.quarkus:quarkus-jdbc-h2")
+    implementation("io.quarkus:quarkus-jdbc-postgresql")
 
     implementation(project(":core"))
 }
