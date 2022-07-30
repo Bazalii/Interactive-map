@@ -1,23 +1,21 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version "1.6.21"
     kotlin("plugin.allopen") version "1.6.21"
-    id("io.quarkus")
-}
-
-repositories {
-    mavenCentral()
-    mavenLocal()
 }
 
 allprojects {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+
     group = "org.mapins"
     version = "1.0.0-SNAPSHOT"
 }
 
 dependencies {
-    implementation(enforcedPlatform("io.quarkus.platform:quarkus-bom:2.1.0.Final"))
     testImplementation(kotlin("test"))
 }
 

@@ -1,11 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version "1.6.21"
     id("io.quarkus")
-}
-
-repositories {
-    mavenCentral()
-    mavenLocal()
 }
 
 val quarkusPlatformGroupId: String by project
@@ -23,5 +18,6 @@ dependencies {
     testImplementation("org.mockito:mockito-inline:4.6.1")
     implementation("io.quarkus:quarkus-test-h2")
     implementation("io.quarkus:quarkus-jdbc-h2")
+
     implementation(project(":core"))
 }
