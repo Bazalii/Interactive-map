@@ -24,7 +24,7 @@ class UserRepositoryTests {
         repository.save(user)
 
         // ASSERT
-        verify(repository, times(1)).save(user)
+        verify(panacheRepository, times(1)).save(user)
     }
 
     @Test
