@@ -12,6 +12,9 @@ pluginManagement {
 }
 
 rootProject.name = "map-test-project"
-include("core")
-include("data")
-include("web")
+
+include(
+    ":data",
+    ":core",
+    ":web"
+)
