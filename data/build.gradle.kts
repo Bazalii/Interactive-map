@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "1.6.21"
     id("io.quarkus")
+    id("org.flywaydb.flyway") version "9.0.4"
 }
 
 val quarkusPlatformGroupId: String by project
@@ -16,6 +17,6 @@ dependencies {
     implementation("io.quarkus:quarkus-test-h2")
     implementation("io.quarkus:quarkus-jdbc-h2")
     implementation("io.quarkus:quarkus-jdbc-postgresql")
-
+    implementation("io.quarkus:quarkus-flyway")
     implementation(project(":core"))
 }
