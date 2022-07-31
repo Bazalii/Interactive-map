@@ -32,6 +32,7 @@ class PanacheUserRepository : PanacheRepository<UserDbModel> {
 
     fun update(user: User) {
         deleteById(user.id)
+
         save(user)
     }
 }
