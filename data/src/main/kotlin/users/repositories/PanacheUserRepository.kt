@@ -29,4 +29,9 @@ class PanacheUserRepository : PanacheRepository<UserDbModel> {
 
         return userList
     }
+
+    fun update(user: User) {
+        deleteById(user.id)
+        save(user)
+    }
 }
