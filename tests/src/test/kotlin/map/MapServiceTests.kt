@@ -25,9 +25,7 @@ class MapServiceTests {
         _mapService.saveChair(chair)
 
         // ASSERT
-        val captor = argumentCaptor<Chair>()
-        verify(_mapRepository, times(1)).saveChair(captor.capture())
-        assertEquals(captor.firstValue, chair)
+        verify(_mapRepository, times(1)).saveChair(chair)
     }
 
     @Test
@@ -39,9 +37,7 @@ class MapServiceTests {
         _mapService.saveTable(table)
 
         // ASSERT
-        val captor = argumentCaptor<Table>()
-        verify(_mapRepository, times(1)).saveTable(captor.capture())
-        assertEquals(captor.firstValue, table)
+        verify(_mapRepository, times(1)).saveTable(table)
     }
 
     @Test
@@ -53,9 +49,7 @@ class MapServiceTests {
         _mapService.saveWall(wall)
 
         // ASSERT
-        val captor = argumentCaptor<Wall>()
-        verify(_mapRepository, times(1)).saveWall(captor.capture())
-        assertEquals(captor.firstValue, wall)
+        verify(_mapRepository, times(1)).saveWall(wall)
     }
 
     @Test
