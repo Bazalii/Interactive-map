@@ -23,4 +23,8 @@ class UserRepository(
     override fun getAll(): List<User> {
         return _userRepository.getAll()
     }
+
+    override fun update(user: User) {
+        _userRepository.update(user)
+    }
 }
