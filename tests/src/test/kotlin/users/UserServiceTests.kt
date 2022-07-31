@@ -5,120 +5,116 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.*
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 import users.models.Role
 import users.models.User
 import users.repositories.IUserRepository
-import users.services.IUserService
 import users.services.implementations.UserService
 import java.util.*
 
 @QuarkusTest
 class UserServiceTests {
-    private val userRepository: IUserRepository = mock()
-    private val userService = UserService(userRepository)
 
-    private val mockIUserService: IUserService = mock()
+    private val _userRepository = mock<IUserRepository>()
+    private val _userService = UserService(_userRepository)
 
     @Test
-    fun save_SuccessPath_SaveUserByUserServiceInUserRepositoryIsCalled() {
+    fun save_SuccessPath_SaveUserIsCalledInUserRepository() {
         // ARRANGE
         val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
 
         // ACT
-        userService.save(user)
+        _userService.save(user)
 
         // ASSERT
-        verify(userRepository, times(1)).save(user)
+        verify(_userRepository, times(1)).save(user)
     }
 
     @Test
-    fun delete_SuccessPath_DeleteUserByIdByUserServiceInUserRepositoryIsCalled() {
+    fun delete_SuccessPath_DeleteUserByIdIsCalledInUserRepository() {
         // ARRANGE
         val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
 
         // ACT
-        userService.save(user)
-        userService.delete(user.id)
+        _userService.save(user)
+        _userService.delete(user.id)
 
         // ASSERT
-        verify(userRepository, times(1)).deleteById(user.id)
+        verify(_userRepository, times(1)).deleteById(user.id)
     }
 
     @Test
-    fun find_SuccessPath_GetUserByIdFromUserRepositoryByUserServiceIsCalled() {
+    fun find_SuccessPath_GetUserByIdIsCalledFromUserRepositoryAndReturnsCorrespondingUser() {
         // ARRANGE
         val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
+        whenever(_userRepository.getById(user.id)).thenReturn(user)
 
         // ACT
-        userService.find(user.id)
+        val searchableUser = _userService.find(user.id)
 
         // ASSERT
-        verify(userRepository, times(1)).getById(user.id)
+        verify(_userRepository, times(1)).getById(user.id)
+        Assertions.assertEquals(user, searchableUser)
     }
 
     @Test
-    fun getAll_SuccessPath_GetAllUsersFromUserRepositoryByUserServiceIsCalled() {
-        // ARRANGE
-
+    fun getAll_SuccessPath_GetAllUsersIsCalledFromUserRepository() {
         // ACT
-        userService.findAll()
+        _userService.findAll()
 
         // ASSERT
-        verify(userRepository, times(1)).getAll()
+        verify(_userRepository, times(1)).getAll()
     }
 
     @Test
-    fun createSuperUser_SuccessPath_CreateSuperUserByUserServiceIsCalled() {
+    fun createSuperUser_SuccessPath_CreateSuperUserIsCalled() {
         // ARRANGE
         val superUser = User("Ivan", "Bazalii", "Boss", Role.SUPERUSER, UUID.randomUUID())
 
         // ACT
-        mockIUserService.createSuperUser(superUser)
+        _userService.createSuperUser(superUser)
 
         // ASSERT
-        verify(mockIUserService, times(1)).createSuperUser(superUser)
+        verify(_userRepository, times(1)).save(superUser)
     }
 
     @Test
-    fun deleteSuperUserById_SuccessPath_DeleteSuperUserByIdByUserServiceIsCalled() {
+    fun deleteSuperUserById_SuccessPath_DeleteSuperUserByIdIsCalled() {
         // ARRANGE
         val superUser = User("Ivan", "Bazalii", "Boss", Role.SUPERUSER, UUID.randomUUID())
 
         // ACT
-        mockIUserService.createSuperUser(superUser)
-        mockIUserService.deleteSuperUserById(superUser.id)
+        _userService.createSuperUser(superUser)
+        _userService.deleteSuperUserById(superUser.id)
 
         // ASSERT
-        verify(mockIUserService, times(1)).deleteSuperUserById(superUser.id)
+        verify(_userRepository, times(1)).deleteById(superUser.id)
     }
 
     @Test
-    fun changeNickname_SuccessPath_MethodChangeUserNicknameIsCalledNewUserNickname() {
+    fun changeNickname_SuccessPath_ChangeUserNicknameIsCalledAndNicknameSuccessfullyChanged() {
         // ARRANGE
         val user = User("Sergey", "Ivanov", "Aboltus", Role.USER, UUID.randomUUID())
 
         // ACT
-        userService.changeNickname(user, "Genius")
-        mockIUserService.changeNickname(user, "Genius")
-        // ASSERT
+        _userService.changeNickname(user, "Genius")
 
-        verify(mockIUserService, times(1)).changeNickname(user, "Genius")
+        // ASSERT
+        verify(_userRepository, times(1)).update(user)
         Assertions.assertEquals("Genius", user.nickname)
     }
 
     @Test
-    fun changeRole_SuccessPath_MethodChangeUserRoleIsCalledNewUserRole() {
+    fun changeRole_SuccessPath_ChangeUserRoleIsCalledAndRoleSuccessfullyChanged() {
         // ARRANGE
         val changedUser = User("Sergey", "Ivanov", "Aboltus", Role.USER, UUID.randomUUID())
         val superUser = User("Ivan", "Bazalii", "Boss", Role.SUPERUSER, UUID.randomUUID())
 
         // ACT
-        userService.changeRole(changedUser, superUser)
-        mockIUserService.changeRole(changedUser, superUser)
+        _userService.changeRole(changedUser, superUser)
 
         // ASSERT
-
-        verify(mockIUserService, times(1)).changeRole(changedUser, superUser)
+        verify(_userRepository, times(1)).update(changedUser)
         Assertions.assertEquals(Role.ADMIN, changedUser.role)
     }
 }
