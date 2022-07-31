@@ -5,6 +5,7 @@ import javax.persistence.Entity
 import javax.persistence.Id
 
 @Entity
+@javax.persistence.Table(name = "\"users\"")
 class UserDbModel(
     var name: String = "",
     var surname: String = "",
