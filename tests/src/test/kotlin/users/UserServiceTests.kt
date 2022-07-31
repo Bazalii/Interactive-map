@@ -50,20 +50,26 @@ class UserServiceTests {
         whenever(_userRepository.getById(user.id)).thenReturn(user)
 
         // ACT
-        val searchableUser = _userService.find(user.id)
+        val foundUser = _userService.find(user.id)
 
         // ASSERT
         verify(_userRepository, times(1)).getById(user.id)
-        Assertions.assertEquals(user, searchableUser)
+        Assertions.assertEquals(user, foundUser)
     }
 
     @Test
-    fun getAll_SuccessPath_GetAllUsersIsCalledFromUserRepository() {
+    fun getAll_SuccessPath_GetAllUsersIsCalledFromUserRepositoryAndReturnsCorrespondingUsers() {
+        // ARRANGE
+        val firstUser = User("Alexey", "Ivanov", "poker303", Role.USER, UUID.randomUUID())
+        val secondUser = User("Sergey", "Ivanov", "serg", Role.USER, UUID.randomUUID())
+        whenever(_userRepository.getAll()).thenReturn(listOf(firstUser, secondUser))
+
         // ACT
-        _userService.findAll()
+        val foundUsers = _userService.findAll()
 
         // ASSERT
         verify(_userRepository, times(1)).getAll()
+        Assertions.assertEquals(listOf(firstUser, secondUser), foundUsers)
     }
 
     @Test
