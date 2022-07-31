@@ -94,7 +94,7 @@ class MapServiceTests {
     fun deleteWall_SuccessPath_DeleteWallInMapRepositoryIsCalled() {
         // ARRANGE
         val firstWall = Wall(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
-        val secondWall =Wall(0.0, 0.0, UUID.randomUUID(), "Fox", 10, 20)
+        val secondWall = Wall(0.0, 0.0, UUID.randomUUID(), "Fox", 10, 20)
 
         // ACT
         _mapService.saveWall(firstWall)
@@ -182,7 +182,7 @@ class MapServiceTests {
     fun getAllWalls_SuccessPath_GetAllWallsInMapRepositoryIsCalledAndReturnsActualList() {
         // ARRANGE
         val firstWall = Wall(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
-        val secondWall =Wall(0.0, 0.0, UUID.randomUUID(), "Fox", 10, 20)
+        val secondWall = Wall(0.0, 0.0, UUID.randomUUID(), "Fox", 10, 20)
         whenever(_mapRepository.getAllWalls()).thenReturn(listOf(firstWall, secondWall))
 
         // ACT
