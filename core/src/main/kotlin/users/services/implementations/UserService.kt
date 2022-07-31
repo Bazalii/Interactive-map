@@ -35,12 +35,15 @@ class UserService(private val _userRepository: IUserRepository) : IUserService {
     }
 
     override fun changeNickname(user: User, newNickName: String) {
+
         user.nickname = newNickName
+        _userRepository.update(user)
     }
 
     override fun changeRole(changedUser: User, superUser: User) {
         if (superUser.role == Role.SUPERUSER) {
             changedUser.role = Role.ADMIN
         }
+        _userRepository.update(changedUser)
     }
 }
