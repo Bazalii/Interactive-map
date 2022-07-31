@@ -1,4 +1,4 @@
-create table ChairDbModel
+create table IF NOT EXISTS chairs
 (
     id          uuid   not null,
     coordinateX float8 not null,
@@ -9,7 +9,7 @@ create table ChairDbModel
     primary key (id)
 );
 
-create table TableDbModel
+create table IF NOT EXISTS tables
 (
     id          uuid   not null,
     color       varchar(255),
@@ -21,7 +21,7 @@ create table TableDbModel
     primary key (id)
 );
 
-create table UserDbModel
+create table IF NOT EXISTS users
 (
     id       uuid not null,
     name     varchar(255),
@@ -31,7 +31,7 @@ create table UserDbModel
     primary key (id)
 );
 
-create table WallDbModel
+create table IF NOT EXISTS walls
 (
     id          uuid   not null,
     coordinateX float8 not null,
