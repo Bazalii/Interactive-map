@@ -8,22 +8,22 @@ import java.util.*
 @GraphQLApi
 class UserController(private val _userService: IUserService) {
     @Query
-    fun getUser(id: UUID): User? {
+    fun getById(id: UUID): User? {
         return _userService.find(id)
     }
 
     @Query
-    fun getUsers(): List<User>? {
+    fun getAll(): List<User>? {
         return _userService.findAll()
     }
 
     @Mutation
-    fun addUser(user: User) {
+    fun add(user: User) {
         _userService.save(user)
     }
 
     @Mutation
-    fun deleteUser(id: UUID) {
+    fun deleteById(id: UUID) {
         _userService.delete(id)
     }
 
@@ -33,20 +33,22 @@ class UserController(private val _userService: IUserService) {
     }
 
     @Mutation
-    fun deleteSuperUser(id: UUID) {
+    fun deleteSuperUserById(id: UUID) {
         _userService.deleteSuperUserById(id)
     }
 
     @Mutation
-    fun updateUserNickname(id: UUID, nickname: String) {
+    fun updateNickname(id: UUID, nickname: String) {
         val user: User = _userService.find(id)!!
+
         _userService.changeNickname(user, nickname)
     }
 
     @Mutation
-    fun updateUserRole(changedUserId: UUID, superUserId: UUID) {
+    fun updateRole(changedUserId: UUID, superUserId: UUID) {
         val changedUser: User = _userService.find(changedUserId)!!
         val superUser: User = _userService.find(superUserId)!!
+
         _userService.changeRole(changedUser, superUser)
     }
 }
