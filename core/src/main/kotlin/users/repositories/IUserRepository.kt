@@ -11,4 +11,6 @@ interface IUserRepository {
     fun getById(id: UUID): User
 
     fun getAll(): List<User>
+
+    fun update(user: User)
 }
