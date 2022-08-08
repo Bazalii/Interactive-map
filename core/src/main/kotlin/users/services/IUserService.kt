@@ -4,7 +4,7 @@ import users.models.User
 import java.util.*
 
 interface IUserService {
-    fun find(id: UUID): User?
+    fun find(id: UUID): User
 
     fun save(user: User)
 

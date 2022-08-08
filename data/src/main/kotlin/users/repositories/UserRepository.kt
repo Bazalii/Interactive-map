@@ -3,11 +3,13 @@ package users.repositories
 import users.models.User
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
+import javax.transaction.Transactional
 
 @ApplicationScoped
 class UserRepository(
     private val _userRepository: PanacheUserRepository
 ) : IUserRepository {
+    @Transactional
     override fun save(user: User) {
         _userRepository.save(user)
     }

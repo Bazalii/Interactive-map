@@ -26,6 +26,7 @@ create table IF NOT EXISTS users
     id       uuid not null,
     name     varchar(255),
     nickname varchar(255),
+    password varchar(255),
     role     int4,
     surname  varchar(255),
     primary key (id)
