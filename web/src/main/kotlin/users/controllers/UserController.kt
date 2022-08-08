@@ -11,13 +11,6 @@ import javax.inject.Inject
 @GraphQLApi
 @RequestScoped
 class UserController(@Inject private val _userService: IUserService) {
-    private fun userConvertToDto(user: User): UserDto {
-        return UserDto(user.name, user.surname, user.nickname, user.password, user.role, user.id)
-    }
-    private fun userDtoConvertToUser(userDto: UserDto): User {
-        return User(userDto.name, userDto.surname, userDto.nickname, userDto.password, userDto.role, userDto.id)
-    }
-
     @RolesAllowed("**")
     @Query
     fun getById(id: UUID): UserDto {
@@ -29,11 +22,13 @@ class UserController(@Inject private val _userService: IUserService) {
     fun getAll(): List<UserDto> {
         val users = _userService.findAll()
         val usersDto = mutableListOf<UserDto>()
+
         if (users != null) {
             for (user in users) {
                 usersDto.add(userConvertToDto(user))
             }
         }
+
         return usersDto
     }
 
@@ -43,6 +38,7 @@ class UserController(@Inject private val _userService: IUserService) {
         val newUser = userDtoConvertToUser(userDto)
 
         _userService.save(newUser)
+
         return userDto
     }
 
@@ -52,6 +48,7 @@ class UserController(@Inject private val _userService: IUserService) {
         val deletedUser = _userService.find(id)
 
         _userService.delete(id)
+
         return userConvertToDto(deletedUser)
     }
 
@@ -61,6 +58,7 @@ class UserController(@Inject private val _userService: IUserService) {
         val newSuperUser = userDtoConvertToUser(superUserDto)
 
         _userService.createSuperUser(newSuperUser)
+
         return superUserDto
     }
 
@@ -70,6 +68,7 @@ class UserController(@Inject private val _userService: IUserService) {
         val deletedSuperUser = _userService.find(id)
 
         _userService.deleteSuperUserById(id)
+
         return userConvertToDto(deletedSuperUser)
     }
 
@@ -79,6 +78,7 @@ class UserController(@Inject private val _userService: IUserService) {
         val changedUser: User = _userService.find(userDto.id)
 
         _userService.changeNickname(changedUser, nickname)
+
         return userConvertToDto(_userService.find(userDto.id))
     }
 
@@ -89,6 +89,15 @@ class UserController(@Inject private val _userService: IUserService) {
         val superUser: User = _userService.find(superUserDto.id)
 
         _userService.changeRole(changedUser, superUser)
+
         return userConvertToDto(_userService.find(changedUserDto.id))
+    }
+
+    private fun userConvertToDto(user: User): UserDto {
+        return UserDto(user.name, user.surname, user.nickname, user.password, user.role, user.id)
+    }
+
+    private fun userDtoConvertToUser(userDto: UserDto): User {
+        return User(userDto.name, userDto.surname, userDto.nickname, userDto.password, userDto.role, userDto.id)
     }
 }
