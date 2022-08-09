@@ -3,15 +3,15 @@ package map.repositories
 import map.models.Chair
 import map.models.Table
 import map.models.Wall
-import java.util.UUID
+import java.util.*
 
 interface IMapRepository {
-    fun saveTable(table: Table)
-    fun saveChair(chair: Chair)
-    fun saveWall(wall: Wall)
-    fun deleteTableById(id: UUID)
-    fun deleteChairById(id: UUID)
-    fun deleteWallById(id: UUID)
+    fun saveTable(table: Table): Table
+    fun saveChair(chair: Chair): Chair
+    fun saveWall(wall: Wall): Wall
+    fun deleteTableById(id: UUID): Table
+    fun deleteChairById(id: UUID): Chair
+    fun deleteWallById(id: UUID): Wall
     fun getTableById(id: UUID): Table
     fun getChairById(id: UUID): Chair
     fun getWallById(id: UUID): Wall
