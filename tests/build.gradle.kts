@@ -14,10 +14,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.quarkus:quarkus-arc")
 
-
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
     testImplementation("org.mockito:mockito-inline:4.6.1")
+    testImplementation("io.quarkus:quarkus-test-h2")
+    testImplementation("io.quarkus:quarkus-jdbc-h2")
 
     implementation(project(":core"))
     implementation(project(":data"))
