@@ -17,8 +17,6 @@ dependencies {
     implementation("io.quarkus:quarkus-arc")
     implementation("io.quarkus:quarkus-resteasy-reactive-jsonb")
     implementation("io.quarkus:quarkus-security-jpa")
-    implementation("io.quarkus:quarkus-test-h2")
-    implementation("io.quarkus:quarkus-jdbc-h2")
     implementation("io.quarkus:quarkus-jdbc-postgresql")
     implementation("io.quarkus:quarkus-flyway")
 
