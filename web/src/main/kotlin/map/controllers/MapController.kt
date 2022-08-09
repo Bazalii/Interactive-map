@@ -12,33 +12,33 @@ import java.util.UUID
 @GraphQLApi
 class MapController(private val _mapService: IMapService) {
     @Mutation
-    fun saveTable(table: Table) {
-        _mapService.saveTable(table)
+    fun saveTable(table: Table) : Table {
+        return _mapService.saveTable(table)
     }
 
     @Mutation
-    fun saveChair(chair: Chair) {
-        _mapService.saveChair(chair)
+    fun saveChair(chair: Chair): Chair {
+        return _mapService.saveChair(chair)
     }
 
     @Mutation
-    fun saveWall(wall: Wall) {
-        _mapService.saveWall(wall)
+    fun saveWall(wall: Wall): Wall {
+        return _mapService.saveWall(wall)
     }
 
     @Mutation
-    fun deleteTable(id: UUID) {
-        _mapService.deleteTableById(id)
+    fun deleteTable(id: UUID): Table {
+        return _mapService.deleteTableById(id)
     }
 
     @Mutation
-    fun deleteChair(id: UUID) {
-        _mapService.deleteChairById(id)
+    fun deleteChair(id: UUID): Chair {
+        return _mapService.deleteChairById(id)
     }
 
     @Mutation
-    fun deleteWall(id: UUID) {
-        _mapService.deleteWallById(id)
+    fun deleteWall(id: UUID): Wall {
+        return _mapService.deleteWallById(id)
     }
 
     @Query

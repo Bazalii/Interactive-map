@@ -14,28 +14,28 @@ class MapService (
         ) : IMapService {
 
 
-    override fun saveTable(table: Table) {
-        _repository.saveTable(table)
+    override fun saveTable(table: Table): Table {
+        return _repository.saveTable(table)
     }
 
-    override fun saveChair(chair: Chair) {
-        _repository.saveChair(chair)
+    override fun saveChair(chair: Chair): Chair {
+        return _repository.saveChair(chair)
     }
 
-    override fun saveWall(wall: Wall) {
-        _repository.saveWall(wall)
+    override fun saveWall(wall: Wall): Wall {
+        return _repository.saveWall(wall)
     }
 
-    override fun deleteTableById(id: UUID) {
-        _repository.deleteTableById(id)
+    override fun deleteTableById(id: UUID): Table {
+        return _repository.deleteTableById(id)
     }
 
-    override fun deleteChairById(id: UUID) {
-        _repository.deleteChairById(id)
+    override fun deleteChairById(id: UUID): Chair {
+        return _repository.deleteChairById(id)
     }
 
-    override fun deleteWallById(id: UUID) {
-        _repository.deleteWallById(id)
+    override fun deleteWallById(id: UUID): Wall {
+        return _repository.deleteWallById(id)
     }
 
     override fun getTableById(id: UUID): Table {
