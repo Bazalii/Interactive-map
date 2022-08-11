@@ -1,5 +1,5 @@
-mutation saveTable($table: TableInput!) {
-    saveTable(table: $table) {
+mutation saveTable($tableDto: TableDtoInput!) {
+    saveTable(tableDto: $tableDto) {
         coordinateX
         coordinateY
         id

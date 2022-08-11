@@ -2,22 +2,11 @@ package map.models
 
 import java.util.*
 
-class Wall() {
-    var coordinateX: Double = 0.0
-    var coordinateY: Double = 0.0
-    var id: UUID = UUID.randomUUID()
-    var creator: String = ""
-    var length: Int = 0
-    var width: Int = 0
-
-    constructor(
-        coordinateX: Double, coordinateY: Double, id: UUID, creator: String, length: Int, width: Int
-    ) : this() {
-        this.coordinateX = coordinateX
-        this.coordinateY = coordinateY
-        this.id = id
-        this.creator = creator
-        this.length = length
-        this.width = width
-    }
-}
+data class Wall (
+    var coordinateX: Double,
+    var coordinateY: Double,
+    var id: UUID,
+    var creator: String,
+    var length: Int,
+    var width: Int
+)

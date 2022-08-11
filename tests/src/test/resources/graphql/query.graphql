@@ -1,8 +1,8 @@
 type Query {
-    chair(id: String!): Chair!
-    table(id: String!): Table!
-    wall(id: String!): Wall!
-    chairs: Chair!
-    tables: Table!
-    walls: Wall!
+    chair(id: String!): ChairDto!
+    table(id: String!): TableDto!
+    wall(id: String!): WallDto!
+    chairs: ChairDto!
+    tables: TableDto!
+    walls: WallDto!
 }

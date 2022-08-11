@@ -1,5 +1,5 @@
-mutation saveChair($chair: ChairInput!) {
-    saveChair(chair: $chair) {
+mutation saveChair($chairDto: ChairDtoInput!) {
+    saveChair(chairDto: $chairDto) {
         coordinateX
         coordinateY
         id

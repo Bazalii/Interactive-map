@@ -1,12 +1,13 @@
 package map
 
+import com.google.gson.Gson
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import io.restassured.response.Response
-import map.models.Chair
-import map.models.Table
-import map.models.Wall
+import map.dto.ChairDto
+import map.dto.TableDto
+import map.dto.WallDto
 import org.junit.jupiter.api.Test
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -31,16 +32,19 @@ class MapControllerHttpTests {
 
     @Test
     fun saveChair_SuccessPath_ChairCreatedAndCorrectStatusCodeIsReturned() {
-        val chair = Chair(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
+        val chair = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
         val file = generateStringFromResource(EndPoints.saveChair)
         val query = GraphQlQuery(file, Variables(chair))
+
+        val gson = Gson()
+        println(gson.toJson(query))
 
         request(query).prettyPrint()
     }
 
     @Test
     fun saveTable_SuccessPath_TableCreatedAndCorrectStatusCodeIsReturned() {
-        val table = Table(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
+        val table = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
         val file = generateStringFromResource(EndPoints.saveTable)
         val query = GraphQlQuery(file, Variables(table))
 
@@ -49,7 +53,7 @@ class MapControllerHttpTests {
 
     @Test
     fun saveWall_SuccessPath_WallCreatedAndCorrectStatusCodeIsReturned() {
-        val wall = Wall(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
+        val wall = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
         val file = generateStringFromResource(EndPoints.saveWall)
         val query = GraphQlQuery(file, Variables(wall))
 
@@ -58,7 +62,7 @@ class MapControllerHttpTests {
 
     @Test
     fun deleteChair_SuccessPath_ChairDeletedAndReturnedCorrectStatusCode() {
-        val chair = Chair(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
+        val chair = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
         var file = generateStringFromResource(EndPoints.saveChair)
         var query = GraphQlQuery(file, Variables(chair))
 
@@ -72,7 +76,7 @@ class MapControllerHttpTests {
 
     @Test
     fun deleteTable_SuccessPath_TableDeletedAndReturnedCorrectStatusCode() {
-        val table = Table(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
+        val table = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
         var file = generateStringFromResource(EndPoints.saveTable)
         var query = GraphQlQuery(file, Variables(table))
 
@@ -86,7 +90,7 @@ class MapControllerHttpTests {
 
     @Test
     fun deleteWall_SuccessPath_WallDeletedAndReturnedCorrectStatusCode() {
-        val wall = Wall(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
+        val wall = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
         var file = generateStringFromResource(EndPoints.saveWall)
         var query = GraphQlQuery(file, Variables(wall))
 
@@ -100,7 +104,7 @@ class MapControllerHttpTests {
 
     @Test
     fun getChairById_SuccessPath_ChairFoundAndReturnedCorrectStatusCode() {
-        val chair = Chair(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
+        val chair = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
         var file = generateStringFromResource(EndPoints.saveChair)
         var query = GraphQlQuery(file, Variables(chair))
 
@@ -114,7 +118,7 @@ class MapControllerHttpTests {
 
     @Test
     fun getTableById_SuccessPath_TableFoundAndReturnedCorrectStatusCode() {
-        val table = Table(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
+        val table = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
         var file = generateStringFromResource(EndPoints.saveTable)
         var query = GraphQlQuery(file, Variables(table))
 
@@ -128,7 +132,7 @@ class MapControllerHttpTests {
 
     @Test
     fun getWallById_SuccessPath_WallFoundAndReturnedCorrectStatusCode() {
-        val wall = Wall(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
+        val wall = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
         var file = generateStringFromResource(EndPoints.saveWall)
         var query = GraphQlQuery(file, Variables(wall))
 

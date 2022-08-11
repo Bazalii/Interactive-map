@@ -1,54 +1,54 @@
 package map
 
-import map.models.Chair
-import map.models.Table
-import map.models.Wall
+import map.dto.ChairDto
+import map.dto.TableDto
+import map.dto.WallDto
 import java.util.*
 
 class Variables() {
-    private lateinit var chair: Chair
-    private lateinit var table: Table
-    private lateinit var wall: Wall
+    private lateinit var chairDto: ChairDto
+    private lateinit var tableDto: TableDto
+    private lateinit var wallDto: WallDto
     private lateinit var id: UUID
 
-    constructor(chair: Chair) : this() {
-        this.chair = chair
+    constructor(chair: ChairDto) : this() {
+        this.chairDto = chair
     }
 
-    constructor(table: Table) : this() {
-        this.table = table
+    constructor(table: TableDto) : this() {
+        this.tableDto = table
     }
 
-    constructor(wall: Wall) : this() {
-        this.wall = wall
+    constructor(wall: WallDto) : this() {
+        this.wallDto = wall
     }
 
     constructor(id: UUID) : this() {
         this.id = id
     }
 
-    fun getChair(): Chair {
-        return chair
+    fun getChair(): ChairDto {
+        return chairDto
     }
 
-    fun setChair(chair: Chair) {
-        this.chair = chair
+    fun setChair(chair: ChairDto) {
+        this.chairDto = chair
     }
 
-    fun getTable(): Table {
-        return table
+    fun getTable(): TableDto {
+        return tableDto
     }
 
-    fun setTable(table: Table) {
-        this.table = table
+    fun setTable(table: TableDto) {
+        this.tableDto = table
     }
 
-    fun getWall(): Wall {
-        return wall
+    fun getWall(): WallDto {
+        return wallDto
     }
 
-    fun setWall(wall: Wall) {
-        this.wall = wall
+    fun setWall(wall: WallDto) {
+        this.wallDto = wall
     }
 
     fun getId(): UUID {

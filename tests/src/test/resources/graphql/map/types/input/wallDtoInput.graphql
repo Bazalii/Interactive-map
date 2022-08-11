@@ -1,8 +1,8 @@
-type Chair {
+input WallDtoInput {
     coordinateX: Float
     coordinateY: Float
     id: ID
     creator: String
-    height: Int
-    legsAmount: Int
+    length: Int
+    width: Int
 }

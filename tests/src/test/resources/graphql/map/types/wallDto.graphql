@@ -1,4 +1,4 @@
-type Wall {
+type WallDto {
     coordinateX: Float
     coordinateY: Float
     id: ID

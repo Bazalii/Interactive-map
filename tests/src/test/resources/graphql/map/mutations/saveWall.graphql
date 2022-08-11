@@ -1,5 +1,5 @@
-mutation saveWall($wall: WallInput!) {
-    saveWall(wall: $wall) {
+mutation saveWall($wallDto: WallDtoInput!) {
+    saveWall(wallDto: $wallDto) {
         coordinateX
         coordinateY
         id

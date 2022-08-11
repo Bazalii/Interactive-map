@@ -1,4 +1,4 @@
-type Table {
+type TableDto {
     coordinateX: Float
     coordinateY: Float
     id: ID
