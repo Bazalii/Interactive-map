@@ -19,6 +19,8 @@ dependencies {
     testImplementation("org.mockito:mockito-inline:4.6.1")
     testImplementation("io.quarkus:quarkus-test-h2")
     testImplementation("io.quarkus:quarkus-jdbc-h2")
+    testImplementation("io.quarkus:quarkus-test-security")
+    testImplementation("io.rest-assured:rest-assured")
 
     implementation(project(":core"))
     implementation(project(":data"))
