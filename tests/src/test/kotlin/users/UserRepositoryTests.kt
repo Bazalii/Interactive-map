@@ -1,6 +1,5 @@
 package users
 
-import io.quarkus.test.junit.QuarkusTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import users.repositories.PanacheUserRepository
@@ -10,7 +9,6 @@ import users.models.User
 import users.repositories.UserRepository
 import java.util.*
 
-@QuarkusTest
 class UserRepositoryTests {
     private val panacheRepository: PanacheUserRepository = mock()
     private val repository = UserRepository(panacheRepository)
@@ -18,7 +16,7 @@ class UserRepositoryTests {
     @Test
     fun saveUser_SuccessPath_SaveInPanacheRepositoryIsCalled() {
         // ARRANGE
-        val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
+        val user = User("test", "test", "nickname", "admin", Role.USER, UUID.randomUUID())
 
         // ACT
         repository.save(user)
@@ -30,7 +28,7 @@ class UserRepositoryTests {
     @Test
     fun deleteUserById_SuccessPath_DeleteInPanacheRepositoryIsCalled() {
         // ARRANGE
-        val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
+        val user = User("test", "test", "nickname", "admin", Role.USER, UUID.randomUUID())
 
         // ACT
         repository.save(user)
@@ -43,7 +41,7 @@ class UserRepositoryTests {
     @Test
     fun getUserById_SuccessPath_ReturnsRequiredUser() {
         // ARRANGE
-        val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
+        val user = User("test", "test", "nickname", "admin", Role.USER, UUID.randomUUID())
 
         // ACT
         whenever(repository.getById(user.id)).thenReturn(user)
@@ -55,7 +53,7 @@ class UserRepositoryTests {
     @Test
     fun getAllUsers_SuccessPath_ReturnsActualList() {
         // ARRANGE
-        val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
+        val user = User("test", "test", "nickname", "admin", Role.USER, UUID.randomUUID())
 
         // ACT
         whenever(panacheRepository.getAll()).thenReturn(listOf(user))
