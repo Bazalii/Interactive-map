@@ -1,0 +1,11 @@
+query tables {
+    tables {
+        coordinateX
+        coordinateY
+        id
+        creator
+        length
+        width
+        color
+    }
+}
