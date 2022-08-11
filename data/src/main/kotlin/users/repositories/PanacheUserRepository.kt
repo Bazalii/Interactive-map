@@ -15,7 +15,7 @@ class PanacheUserRepository : PanacheRepository<UserDbModel> {
     }
 
     fun deleteById(id: UUID) {
-        delete("id", getById(id))
+        delete("id", id)
     }
 
     fun getById(id: UUID): User {
