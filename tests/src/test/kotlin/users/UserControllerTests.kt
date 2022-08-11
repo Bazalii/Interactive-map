@@ -17,9 +17,9 @@ class UserControllerTests {
     @Test
     fun add_SuccessPath_SaveUserIsCalledAndReturnsCorrespondingAddedUser() {
         // ARRANGE
-        val usersId = UUID.randomUUID()
-        val userDto = UserDto("test", "test", "nickname", "admin", Role.USER, usersId)
-        val user = User("test", "test", "nickname", "admin", Role.USER, usersId)
+        val userId = UUID.randomUUID()
+        val userDto = UserDto("test", "test", "nickname", "admin", Role.USER, userId)
+        val user = User("test", "test", "nickname", "admin", Role.USER, userId)
 
         // ACT
         val newUser = _userController.add(userDto)
@@ -30,15 +30,17 @@ class UserControllerTests {
     }
 
     @Test
-    fun deleteById_SuccessPath_DeleteUserIsCalledAndReturnsCorrespondingDeletedDtoUser() {
+    fun deleteById_SuccessPath_DeleteUserIsCalledAndReturnsCorrespondingDeletedUserDto() {
         // ARRANGE
-        val usersId = UUID.randomUUID()
-        val userDto = UserDto("test", "test", "nickname", "admin", Role.USER, usersId)
-        val user = User("test", "test", "nickname", "admin", Role.USER, usersId)
+        val userId = UUID.randomUUID()
+        val userDto = UserDto("test", "test", "nickname", "admin", Role.USER, userId)
+        val user = User("test", "test", "nickname", "admin", Role.USER, userId)
+
         whenever(_userService.find(userDto.id)).thenReturn(user)
 
         // ACT
         _userController.add(userDto)
+
         val deletedUser = _userController.deleteById(userDto.id)
 
         // ASSERT
@@ -47,11 +49,12 @@ class UserControllerTests {
     }
 
     @Test
-    fun getById_SuccessPath_FindUserIsCalledAndReturnsCorrespondingDtoUser() {
+    fun getById_SuccessPath_FindUserIsCalledAndReturnsCorrespondingUserDto() {
         // ARRANGE
-        val usersId = UUID.randomUUID()
-        val userDto = UserDto("test", "test", "nickname", "admin", Role.USER, usersId)
-        val user = User("test", "test", "nickname", "admin", Role.USER, usersId)
+        val userId = UUID.randomUUID()
+        val userDto = UserDto("test", "test", "nickname", "admin", Role.USER, userId)
+        val user = User("test", "test", "nickname", "admin", Role.USER, userId)
+
         whenever(_userService.find(userDto.id)).thenReturn(user)
 
         // ACT
@@ -63,13 +66,14 @@ class UserControllerTests {
     }
 
     @Test
-    fun getAll_SuccessPath_FindAllUsersIsCalledAndReturnsCorrespondingDtoUsers() {
+    fun getAll_SuccessPath_FindAllUsersIsCalledAndReturnsCorrespondingUsersDto() {
         // ARRANGE
         val firstUserId = UUID.randomUUID()
         val firstUser = User("Alexey", "Ivanov", "poker303", "admin", Role.USER, firstUserId)
 
         val secondUserId = UUID.randomUUID()
         val secondUser = User("Sergey", "Ivanov", "serg", "admin", Role.USER, secondUserId)
+
         whenever(_userService.findAll()).thenReturn(listOf(firstUser, secondUser))
 
         // ACT
@@ -83,8 +87,10 @@ class UserControllerTests {
         // ARRANGE
         val userId = UUID.randomUUID()
         val newNickname = "Genius"
+
         val user = User("Sergey", "Ivanov", "Aboltus", "admin", Role.USER, userId)
         val userDto = UserDto("Sergey", "Ivanov", "Aboltus", "admin", Role.USER, userId)
+
         whenever(_userService.find(userDto.id)).thenReturn(user)
 
         // ACT
@@ -98,12 +104,15 @@ class UserControllerTests {
     fun updateRole_SuccessPath_ChangeUserRoleIsCalled() {
         // ARRANGE
         val changedUserId = UUID.randomUUID()
+
         val changedUser = User("Sergey", "Ivanov", "Aboltus", "admin", Role.USER, changedUserId)
         val changedUserDto = UserDto("Sergey", "Ivanov", "Aboltus", "admin", Role.USER, changedUserId)
 
         val superUserId = UUID.randomUUID()
+
         val superUser = User("Ivan", "Bazalii", "Boss", "admin", Role.SUPERUSER, superUserId)
         val superUserDto = UserDto("Ivan", "Bazalii", "Boss", "admin", Role.SUPERUSER, superUserId)
+
         whenever(_userService.find(changedUserDto.id)).thenReturn(changedUser)
         whenever(_userService.find(superUserDto.id)).thenReturn(superUser)
 
