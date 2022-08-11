@@ -3,10 +3,10 @@ package map.models
 import java.util.*
 
 data class Wall (
-    var coordinateX: Double,
-    var coordinateY: Double,
-    var id: UUID,
-    var creator: String,
-    var length: Int,
-    var width: Int
+    val coordinateX: Double,
+    val coordinateY: Double,
+    val id: UUID,
+    val creator: String,
+    val length: Int,
+    val width: Int
 )

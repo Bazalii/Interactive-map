@@ -3,10 +3,10 @@ package map.models
 import java.util.*
 
 data class Chair (
-    var coordinateX: Double,
-    var coordinateY: Double,
-    var id: UUID,
-    var creator: String,
-    var height: Int,
-    var legsAmount: Int
+    val coordinateX: Double,
+    val coordinateY: Double,
+    val id: UUID,
+    val creator: String,
+    val height: Int,
+    val legsAmount: Int
 )

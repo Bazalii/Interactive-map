@@ -3,11 +3,11 @@ package map.models
 import java.util.*
 
 data class Table (
-    var coordinateX: Double,
-    var coordinateY: Double,
-    var id: UUID,
-    var creator: String,
-    var length: Int,
-    var width: Int,
-    var color: String
+    val coordinateX: Double,
+    val coordinateY: Double,
+    val id: UUID,
+    val creator: String,
+    val length: Int,
+    val width: Int,
+    val color: String
 )
