@@ -13,11 +13,10 @@ class UserRepository(
     override fun save(user: User) {
         _userRepository.save(user)
     }
-
+    @Transactional
     override fun deleteById(id: UUID) {
         return _userRepository.deleteById(id)
     }
-
     override fun getById(id: UUID): User {
         return _userRepository.getById(id)
     }
@@ -26,6 +25,7 @@ class UserRepository(
         return _userRepository.getAll()
     }
 
+    @Transactional
     override fun update(user: User) {
         _userRepository.update(user)
     }
