@@ -23,7 +23,7 @@ class WallRepository : PanacheRepository<WallDbModel> {
     fun deleteById(id: UUID): Wall {
         val wall = getById(id)
 
-        delete("id", getById(id))
+        delete("id", id)
 
         return wall
     }

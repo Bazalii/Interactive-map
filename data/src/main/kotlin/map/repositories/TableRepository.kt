@@ -23,7 +23,7 @@ class TableRepository : PanacheRepository<TableDbModel> {
     fun deleteById(id: UUID): Table {
         val table = getById(id)
 
-        delete("id", getById(id))
+        delete("id", id)
 
         return table
     }

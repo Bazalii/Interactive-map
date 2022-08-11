@@ -22,7 +22,7 @@ class ChairRepository : PanacheRepository<ChairDbModel> {
     fun deleteById(id: UUID): Chair {
         val chair = getById(id)
 
-        delete("id", getById(id))
+        delete("id", id)
 
         return chair
     }
