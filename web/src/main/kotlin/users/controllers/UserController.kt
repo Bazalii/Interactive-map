@@ -11,18 +11,15 @@ import javax.inject.Inject
 @GraphQLApi
 @RequestScoped
 class UserController(@Inject private val _userService: IUserService) {
-    @RolesAllowed("**")
     @Query
     fun getById(id: UUID): UserDto {
         return userConvertToDto(_userService.find(id))
     }
 
-    @RolesAllowed("**")
     @Query
     fun getAll(): List<UserDto> {
         val users = _userService.findAll()
         val usersDto = mutableListOf<UserDto>()
-
         if (users != null) {
             for (user in users) {
                 usersDto.add(userConvertToDto(user))
@@ -32,7 +29,6 @@ class UserController(@Inject private val _userService: IUserService) {
         return usersDto
     }
 
-    @RolesAllowed("**")
     @Mutation
     fun add(userDto: UserDto): UserDto {
         val newUser = userDtoConvertToUser(userDto)
@@ -42,7 +38,6 @@ class UserController(@Inject private val _userService: IUserService) {
         return userDto
     }
 
-    @RolesAllowed("ADMIN", "SUPERUSER")
     @Mutation
     fun deleteById(id: UUID): UserDto {
         val deletedUser = _userService.find(id)
@@ -52,7 +47,6 @@ class UserController(@Inject private val _userService: IUserService) {
         return userConvertToDto(deletedUser)
     }
 
-    @RolesAllowed("SUPERUSER")
     @Mutation
     fun createSuperUser(superUserDto: UserDto): UserDto {
         val newSuperUser = userDtoConvertToUser(superUserDto)
@@ -62,7 +56,6 @@ class UserController(@Inject private val _userService: IUserService) {
         return superUserDto
     }
 
-    @RolesAllowed("SUPERUSER")
     @Mutation
     fun deleteSuperUserById(id: UUID): UserDto {
         val deletedSuperUser = _userService.find(id)
@@ -72,7 +65,6 @@ class UserController(@Inject private val _userService: IUserService) {
         return userConvertToDto(deletedSuperUser)
     }
 
-    @RolesAllowed("USER", "SUPERUSER")
     @Mutation
     fun updateNickname(userDto: UserDto, nickname: String): UserDto {
         val changedUser: User = _userService.find(userDto.id)
@@ -82,7 +74,6 @@ class UserController(@Inject private val _userService: IUserService) {
         return userConvertToDto(_userService.find(userDto.id))
     }
 
-    @RolesAllowed("SUPERUSER")
     @Mutation
     fun updateRole(changedUserDto: UserDto, superUserDto: UserDto): UserDto {
         val changedUser: User = _userService.find(changedUserDto.id)
@@ -96,7 +87,6 @@ class UserController(@Inject private val _userService: IUserService) {
     private fun userConvertToDto(user: User): UserDto {
         return UserDto(user.name, user.surname, user.nickname, user.password, user.role, user.id)
     }
-
     private fun userDtoConvertToUser(userDto: UserDto): User {
         return User(userDto.name, userDto.surname, userDto.nickname, userDto.password, userDto.role, userDto.id)
     }

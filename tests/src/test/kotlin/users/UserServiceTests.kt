@@ -1,6 +1,5 @@
 package users
 
-import io.quarkus.test.junit.QuarkusTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.*
@@ -12,16 +11,14 @@ import users.repositories.IUserRepository
 import users.services.implementations.UserService
 import java.util.*
 
-@QuarkusTest
 class UserServiceTests {
-
     private val _userRepository = mock<IUserRepository>()
     private val _userService = UserService(_userRepository)
 
     @Test
     fun save_SuccessPath_SaveUserIsCalledInUserRepository() {
         // ARRANGE
-        val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
+        val user = User("test", "test", "nickname", "admin", Role.USER, UUID.randomUUID())
 
         // ACT
         _userService.save(user)
@@ -33,7 +30,7 @@ class UserServiceTests {
     @Test
     fun delete_SuccessPath_DeleteUserByIdIsCalledInUserRepository() {
         // ARRANGE
-        val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
+        val user = User("test", "test", "nickname", "admin", Role.USER, UUID.randomUUID())
 
         // ACT
         _userService.save(user)
@@ -46,7 +43,7 @@ class UserServiceTests {
     @Test
     fun find_SuccessPath_GetUserByIdIsCalledFromUserRepositoryAndReturnsCorrespondingUser() {
         // ARRANGE
-        val user = User("test", "test", "nickname", Role.USER, UUID.randomUUID())
+        val user = User("test", "test", "nickname", "admin", Role.USER, UUID.randomUUID())
         whenever(_userRepository.getById(user.id)).thenReturn(user)
 
         // ACT
@@ -60,8 +57,8 @@ class UserServiceTests {
     @Test
     fun getAll_SuccessPath_GetAllUsersIsCalledFromUserRepositoryAndReturnsCorrespondingUsers() {
         // ARRANGE
-        val firstUser = User("Alexey", "Ivanov", "poker303", Role.USER, UUID.randomUUID())
-        val secondUser = User("Sergey", "Ivanov", "serg", Role.USER, UUID.randomUUID())
+        val firstUser = User("Alexey", "Ivanov", "poker303", "admin", Role.USER, UUID.randomUUID())
+        val secondUser = User("Sergey", "Ivanov", "serg", "admin", Role.USER, UUID.randomUUID())
         whenever(_userRepository.getAll()).thenReturn(listOf(firstUser, secondUser))
 
         // ACT
@@ -75,7 +72,7 @@ class UserServiceTests {
     @Test
     fun createSuperUser_SuccessPath_CreateSuperUserIsCalled() {
         // ARRANGE
-        val superUser = User("Ivan", "Bazalii", "Boss", Role.SUPERUSER, UUID.randomUUID())
+        val superUser = User("Ivan", "Bazalii", "Boss", "admin", Role.SUPERUSER, UUID.randomUUID())
 
         // ACT
         _userService.createSuperUser(superUser)
@@ -87,7 +84,7 @@ class UserServiceTests {
     @Test
     fun deleteSuperUserById_SuccessPath_DeleteSuperUserByIdIsCalled() {
         // ARRANGE
-        val superUser = User("Ivan", "Bazalii", "Boss", Role.SUPERUSER, UUID.randomUUID())
+        val superUser = User("Ivan", "Bazalii", "Boss", "admin", Role.SUPERUSER, UUID.randomUUID())
 
         // ACT
         _userService.createSuperUser(superUser)
@@ -100,7 +97,7 @@ class UserServiceTests {
     @Test
     fun changeNickname_SuccessPath_ChangeUserNicknameIsCalledAndNicknameSuccessfullyChanged() {
         // ARRANGE
-        val user = User("Sergey", "Ivanov", "Aboltus", Role.USER, UUID.randomUUID())
+        val user = User("Sergey", "Ivanov", "Aboltus","admin", Role.USER, UUID.randomUUID())
 
         // ACT
         _userService.changeNickname(user, "Genius")
@@ -113,8 +110,8 @@ class UserServiceTests {
     @Test
     fun changeRole_SuccessPath_ChangeUserRoleIsCalledAndRoleSuccessfullyChanged() {
         // ARRANGE
-        val changedUser = User("Sergey", "Ivanov", "Aboltus", Role.USER, UUID.randomUUID())
-        val superUser = User("Ivan", "Bazalii", "Boss", Role.SUPERUSER, UUID.randomUUID())
+        val changedUser = User("Sergey", "Ivanov", "Aboltus","admin", Role.USER, UUID.randomUUID())
+        val superUser = User("Ivan", "Bazalii", "Boss", "admin", Role.SUPERUSER, UUID.randomUUID())
 
         // ACT
         _userService.changeRole(changedUser, superUser)
