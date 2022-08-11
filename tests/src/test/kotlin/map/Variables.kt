@@ -3,7 +3,7 @@ package map
 import map.models.Chair
 import map.models.Table
 import map.models.Wall
-import java.util.UUID
+import java.util.*
 
 class Variables() {
     private lateinit var chair: Chair
@@ -11,19 +11,19 @@ class Variables() {
     private lateinit var wall: Wall
     private lateinit var id: UUID
 
-    constructor(chair: Chair): this() {
+    constructor(chair: Chair) : this() {
         this.chair = chair
     }
 
-    constructor(table: Table): this() {
+    constructor(table: Table) : this() {
         this.table = table
     }
 
-    constructor(wall: Wall): this() {
+    constructor(wall: Wall) : this() {
         this.wall = wall
     }
 
-    constructor(id: UUID): this() {
+    constructor(id: UUID) : this() {
         this.id = id
     }
 

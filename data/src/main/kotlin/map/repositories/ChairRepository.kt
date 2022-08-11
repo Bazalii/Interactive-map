@@ -3,7 +3,8 @@ package map.repositories
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepository
 import map.extensions.toChair
 import map.extensions.toChairDbModel
-import map.models.*
+import map.models.Chair
+import map.models.ChairDbModel
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
 

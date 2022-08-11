@@ -4,11 +4,11 @@ class GraphQlQuery() {
     private lateinit var query: String
     private lateinit var variables: Variables
 
-    constructor(query: String): this() {
+    constructor(query: String) : this() {
         this.query = query
     }
 
-    constructor(query: String, variables: Variables): this() {
+    constructor(query: String, variables: Variables) : this() {
         this.query = query
         this.variables = variables
     }

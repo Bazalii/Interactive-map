@@ -7,14 +7,14 @@ import map.services.IMapService
 import org.eclipse.microprofile.graphql.GraphQLApi
 import org.eclipse.microprofile.graphql.Mutation
 import org.eclipse.microprofile.graphql.Query
-import java.util.UUID
+import java.util.*
 import javax.enterprise.context.RequestScoped
 
 @GraphQLApi
 @RequestScoped
 class MapController(private val _mapService: IMapService) {
     @Mutation
-    fun saveTable(table: Table) : Table {
+    fun saveTable(table: Table): Table {
         return _mapService.saveTable(table)
     }
 
@@ -59,17 +59,17 @@ class MapController(private val _mapService: IMapService) {
     }
 
     @Query
-    fun getTables() : List<Table> {
+    fun getTables(): List<Table> {
         return _mapService.getAllTables()
     }
 
     @Query
-    fun getChairs() : List<Chair> {
+    fun getChairs(): List<Chair> {
         return _mapService.getAllChairs()
     }
 
     @Query
-    fun getWalls() : List<Wall> {
+    fun getWalls(): List<Wall> {
         return _mapService.getAllWalls()
     }
 }

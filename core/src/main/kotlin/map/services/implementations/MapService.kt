@@ -5,13 +5,13 @@ import map.models.Table
 import map.models.Wall
 import map.repositories.IMapRepository
 import map.services.IMapService
-import java.util.UUID
+import java.util.*
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
-class MapService (
+class MapService(
     private val _repository: IMapRepository,
-        ) : IMapService {
+) : IMapService {
 
 
     override fun saveTable(table: Table): Table {
