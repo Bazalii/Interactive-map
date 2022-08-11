@@ -1,0 +1,10 @@
+mutation deleteChair($id: String!) {
+    deleteChair(id: $id) {
+        coordinateX
+        coordinateY
+        id
+        creator
+        height
+        legsAmount
+    }
+}

@@ -1,0 +1,10 @@
+mutation saveChair($chair: ChairInput!) {
+    saveChair(chair: $chair) {
+        coordinateX
+        coordinateY
+        id
+        creator
+        height
+        legsAmount
+    }
+}

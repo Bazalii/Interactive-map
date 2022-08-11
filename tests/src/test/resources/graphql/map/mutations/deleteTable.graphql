@@ -1,0 +1,11 @@
+mutation deleteTable($id: String!) {
+    deleteTable(id: $id) {
+        coordinateX
+        coordinateY
+        id
+        creator
+        length
+        width
+        color
+    }
+}

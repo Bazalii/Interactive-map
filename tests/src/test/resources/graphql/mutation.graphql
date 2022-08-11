@@ -1,0 +1,8 @@
+type Mutation {
+    saveChair(chair: ChairInput!): Chair!
+    saveTable(table: TableInput!): Table!
+    saveWall(wall: WallInput!): Wall!
+    deleteChair(id: String!): Chair!
+    deleteTable(id: String!): Table!
+    deleteWall(id: String!): Wall!
+}

@@ -1,0 +1,10 @@
+mutation deleteWall($id: String!) {
+    deleteWall(id: $id) {
+        coordinateX
+        coordinateY
+        id
+        creator
+        length
+        width
+    }
+}

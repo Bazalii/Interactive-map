@@ -1,0 +1,10 @@
+mutation saveWall($wall: WallInput!) {
+    saveWall(wall: $wall) {
+        coordinateX
+        coordinateY
+        id
+        creator
+        length
+        width
+    }
+}
