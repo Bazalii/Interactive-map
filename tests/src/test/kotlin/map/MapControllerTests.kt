@@ -22,7 +22,7 @@ class MapControllerTests {
     @Test
     fun saveChair_SuccessPath_SaveChairInMapServiceIsCalledAndReturnsCorrespondingChair() {
         // ARRANGE
-        val chairDto = ChairDto(0.0, 0.0, "Fox", 2, 4)
+        val chairDto = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
         val chair = chairDto.toChair()
 
         whenever(_mapService.saveChair(chair)).thenReturn(chair)
