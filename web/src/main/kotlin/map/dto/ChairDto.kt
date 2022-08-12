@@ -20,14 +20,4 @@ class ChairDto() {
         this.height = height
         this.legsAmount = legsAmount
     }
-
-    constructor(
-        coordinateX: Double, coordinateY: Double, creator: String, height: Int, legsAmount: Int
-    ) : this() {
-        this.coordinateX = coordinateX
-        this.coordinateY = coordinateY
-        this.creator = creator
-        this.height = height
-        this.legsAmount = legsAmount
-    }
 }
