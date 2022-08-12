@@ -22,12 +22,24 @@ class MapControllerHttpTests {
     }
 
     private fun request(query: GraphQlQuery): Response {
-        return given().contentType(ContentType.JSON).body(query).`when`().post(_baseURL).then().assertThat()
-            .statusCode(200).and().extract().response()
+        return given()
+            .contentType(ContentType.JSON)
+            .body(query)
+            .`when`()
+            .post(_baseURL)
+            .then()
+            .assertThat()
+            .statusCode(200)
+            .and()
+            .extract()
+            .response()
     }
 
     private fun requestWithoutStatusCode(query: GraphQlQuery): Response {
-        return given().contentType(ContentType.JSON).body(query).post(_baseURL)
+        return given()
+            .contentType(ContentType.JSON)
+            .body(query)
+            .post(_baseURL)
     }
 
     @Test

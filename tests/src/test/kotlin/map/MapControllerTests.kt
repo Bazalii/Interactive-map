@@ -24,6 +24,7 @@ class MapControllerTests {
         // ARRANGE
         val chairDto = ChairDto(0.0, 0.0, "Fox", 2, 4)
         val chair = chairDto.toChair()
+
         whenever(_mapService.saveChair(chair)).thenReturn(chair)
 
         // ACT
@@ -38,6 +39,7 @@ class MapControllerTests {
         // ARRANGE
         val tableDto = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
         val table = tableDto.toTable()
+
         whenever(_mapService.saveTable(table)).thenReturn(table)
 
         // ACT
@@ -52,6 +54,7 @@ class MapControllerTests {
         // ARRANGE
         val wallDto = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
         val wall = wallDto.toWall()
+
         whenever(_mapService.saveWall(wall)).thenReturn(wall)
 
         // ACT
@@ -66,12 +69,13 @@ class MapControllerTests {
         // ARRANGE
         val firstChairDto = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
         val secondChairDto = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 5, 10)
+
         val firstChair = firstChairDto.toChair()
         val secondChair = secondChairDto.toChair()
+
         whenever(_mapService.saveChair(firstChair)).thenReturn(firstChair)
         whenever(_mapService.saveChair(secondChair)).thenReturn(secondChair)
         whenever(_mapService.deleteChairById(secondChair.id)).thenReturn(secondChair)
-
 
         // ACT
         _mapController.saveChair(firstChairDto)
@@ -88,8 +92,10 @@ class MapControllerTests {
         // ARRANGE
         val firstTableDto = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
         val secondTableDto = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 5, 10, "red")
+
         val firstTable = firstTableDto.toTable()
         val secondTable = secondTableDto.toTable()
+
         whenever(_mapService.saveTable(firstTable)).thenReturn(firstTable)
         whenever(_mapService.saveTable(secondTable)).thenReturn(secondTable)
         whenever(_mapService.deleteTableById(secondTable.id)).thenReturn(secondTable)
@@ -109,12 +115,13 @@ class MapControllerTests {
         // ARRANGE
         val firstWallDto = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
         val secondWallDto = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 10, 20)
+
         val firstWall = firstWallDto.toWall()
         val secondWall = secondWallDto.toWall()
+
         whenever(_mapService.saveWall(firstWall)).thenReturn(firstWall)
         whenever(_mapService.saveWall(secondWall)).thenReturn(secondWall)
         whenever(_mapService.deleteWallById(secondWall.id)).thenReturn(secondWall)
-
 
         // ACT
         _mapController.saveWall(firstWallDto)
@@ -130,6 +137,7 @@ class MapControllerTests {
     fun getChairById_SuccessPath_GetChairByIdInMapServiceIsCalledAndReturnsCorrespondingChair() {
         // ARRANGE
         val chairDto = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
+
         whenever(_mapService.getChairById(chairDto.id)).thenReturn(chairDto.toChair())
 
         // ACT
@@ -143,6 +151,7 @@ class MapControllerTests {
     fun getTableById_SuccessPath_GetTableByIdInMapServiceIsCalledAndReturnsCorrespondingTable() {
         // ARRANGE
         val tableDto = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
+
         whenever(_mapService.getTableById(tableDto.id)).thenReturn(tableDto.toTable())
 
         // ACT
@@ -156,6 +165,7 @@ class MapControllerTests {
     fun getWallById_SuccessPath_GetWallByIdInMapServiceIsCalledAndReturnsCorrespondingWall() {
         // ARRANGE
         val wallDto = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
+
         whenever(_mapService.getWallById(wallDto.id)).thenReturn(wallDto.toWall())
 
         // ACT
@@ -170,6 +180,7 @@ class MapControllerTests {
         // ARRANGE
         val firstChairDto = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
         val secondChairDto = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 5, 10)
+
         whenever(_mapService.getAllChairs()).thenReturn(listOf(firstChairDto.toChair(), secondChairDto.toChair()))
 
         // ACT
@@ -184,6 +195,7 @@ class MapControllerTests {
         // ARRANGE
         val firstTableDto = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
         val secondTableDto = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 5, 10, "red")
+
         whenever(_mapService.getAllTables()).thenReturn(listOf(firstTableDto.toTable(), secondTableDto.toTable()))
 
         // ACT
@@ -198,6 +210,7 @@ class MapControllerTests {
         // ARRANGE
         val firstWallDto = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
         val secondWallDto = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 10, 20)
+
         whenever(_mapService.getAllWalls()).thenReturn(listOf(firstWallDto.toWall(), secondWallDto.toWall()))
 
         // ACT
