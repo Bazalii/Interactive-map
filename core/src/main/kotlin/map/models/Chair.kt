@@ -2,7 +2,7 @@ package map.models
 
 import java.util.*
 
-data class Chair (
+data class Chair(
     val coordinateX: Double,
     val coordinateY: Double,
     val id: UUID,

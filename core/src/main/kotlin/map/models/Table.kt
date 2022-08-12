@@ -2,7 +2,7 @@ package map.models
 
 import java.util.*
 
-data class Table (
+data class Table(
     val coordinateX: Double,
     val coordinateY: Double,
     val id: UUID,

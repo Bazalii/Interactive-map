@@ -2,7 +2,7 @@ package map.models
 
 import java.util.*
 
-data class Wall (
+data class Wall(
     val coordinateX: Double,
     val coordinateY: Double,
     val id: UUID,
