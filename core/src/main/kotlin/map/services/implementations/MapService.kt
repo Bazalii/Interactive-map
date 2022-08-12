@@ -9,11 +9,7 @@ import java.util.*
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
-class MapService(
-    private val _repository: IMapRepository,
-) : IMapService {
-
-
+class MapService(private val _repository: IMapRepository) : IMapService {
     override fun saveTable(table: Table): Table {
         return _repository.saveTable(table)
     }
