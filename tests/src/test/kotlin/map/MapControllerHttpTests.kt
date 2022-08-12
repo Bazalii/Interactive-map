@@ -1,6 +1,5 @@
 package map
 
-import com.google.gson.Gson
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
@@ -47,9 +46,6 @@ class MapControllerHttpTests {
         val chair = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
         val file = generateStringFromResource(EndPoints.saveChair)
         val query = GraphQlQuery(file, Variables(chair))
-
-        val gson = Gson()
-        println(gson.toJson(query))
 
         request(query).prettyPrint()
     }
