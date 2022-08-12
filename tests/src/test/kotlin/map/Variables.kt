@@ -6,56 +6,24 @@ import map.dto.WallDto
 import java.util.*
 
 class Variables() {
-    private lateinit var chairDto: ChairDto
-    private lateinit var tableDto: TableDto
-    private lateinit var wallDto: WallDto
-    private lateinit var id: UUID
+    lateinit var chairDto: ChairDto
+    lateinit var tableDto: TableDto
+    lateinit var wallDto: WallDto
+    lateinit var id: UUID
 
-    constructor(chair: ChairDto) : this() {
-        this.chairDto = chair
+    constructor(chairDtoInput: ChairDto) : this() {
+        chairDto = chairDtoInput
     }
 
-    constructor(table: TableDto) : this() {
-        this.tableDto = table
+    constructor(tableDtoInput: TableDto) : this() {
+        tableDto = tableDtoInput
     }
 
-    constructor(wall: WallDto) : this() {
-        this.wallDto = wall
+    constructor(wallDtoInput: WallDto) : this() {
+        wallDto = wallDtoInput
     }
 
-    constructor(id: UUID) : this() {
-        this.id = id
-    }
-
-    fun getChair(): ChairDto {
-        return chairDto
-    }
-
-    fun setChair(chair: ChairDto) {
-        this.chairDto = chair
-    }
-
-    fun getTable(): TableDto {
-        return tableDto
-    }
-
-    fun setTable(table: TableDto) {
-        this.tableDto = table
-    }
-
-    fun getWall(): WallDto {
-        return wallDto
-    }
-
-    fun setWall(wall: WallDto) {
-        this.wallDto = wall
-    }
-
-    fun getId(): UUID {
-        return id
-    }
-
-    fun setId(id: UUID) {
-        this.id = id
+    constructor(idDtoInput: UUID) : this() {
+        id = idDtoInput
     }
 }

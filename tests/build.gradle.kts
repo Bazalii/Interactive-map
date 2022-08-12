@@ -18,8 +18,6 @@ dependencies {
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
     testImplementation("org.mockito:mockito-inline:4.6.1")
 
-    testImplementation("com.google.code.gson:gson:2.8.5")
-
     implementation(project(":core"))
     implementation(project(":data"))
     implementation(project(":web"))

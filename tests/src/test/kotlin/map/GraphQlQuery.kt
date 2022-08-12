@@ -1,31 +1,15 @@
 package map
 
 class GraphQlQuery() {
-    private lateinit var query: String
-    private lateinit var variables: Variables
+    lateinit var query: String
+    lateinit var variables: Variables
 
-    constructor(query: String) : this() {
-        this.query = query
+    constructor(queryInput: String) : this() {
+        query = queryInput
     }
 
-    constructor(query: String, variables: Variables) : this() {
-        this.query = query
-        this.variables = variables
-    }
-
-    fun getQuery(): String {
-        return query
-    }
-
-    fun setQuery(query: String) {
-        this.query = query
-    }
-
-    fun getVariables(): Any {
-        return variables
-    }
-
-    fun setVariables(variables: Variables) {
-        this.variables = variables
+    constructor(queryInput: String, variablesInput: Variables) : this() {
+        query = queryInput
+        variables = variablesInput
     }
 }
