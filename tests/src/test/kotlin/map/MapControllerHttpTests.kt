@@ -4,9 +4,7 @@ import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import io.restassured.response.Response
-import map.dto.ChairDto
-import map.dto.TableDto
-import map.dto.WallDto
+import map.dto.*
 import org.junit.jupiter.api.Test
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -41,113 +39,117 @@ class MapControllerHttpTests {
             .post(_baseURL)
     }
 
+    private fun getIdFromResponse(response: String): UUID {
+        return UUID.fromString(response.substringAfter("\"id\": \"").substringBefore('\"'))
+    }
+
     @Test
     fun saveChair_SuccessPath_ChairCreatedAndCorrectStatusCodeIsReturned() {
-        val chair = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
+        val chairRequest = ChairRequest(0.0, 0.0, "Fox", 2, 4)
         val file = generateStringFromResource(EndPoints.saveChair)
-        val query = GraphQlQuery(file, Variables(chair))
+        val query = GraphQlQuery(file, Variables(chairRequest))
 
         request(query).prettyPrint()
     }
 
     @Test
     fun saveTable_SuccessPath_TableCreatedAndCorrectStatusCodeIsReturned() {
-        val table = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
+        val tableRequest = TableRequest(0.0, 0.0, "Fox", 1, 2, "red")
         val file = generateStringFromResource(EndPoints.saveTable)
-        val query = GraphQlQuery(file, Variables(table))
+        val query = GraphQlQuery(file, Variables(tableRequest))
 
         request(query).prettyPrint()
     }
 
     @Test
     fun saveWall_SuccessPath_WallCreatedAndCorrectStatusCodeIsReturned() {
-        val wall = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
+        val wallRequest = WallRequest(0.0, 0.0, "Fox", 4, 5)
         val file = generateStringFromResource(EndPoints.saveWall)
-        val query = GraphQlQuery(file, Variables(wall))
+        val query = GraphQlQuery(file, Variables(wallRequest))
 
         request(query).prettyPrint()
     }
 
     @Test
     fun deleteChair_SuccessPath_ChairDeletedAndReturnedCorrectStatusCode() {
-        val chair = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
+        val chairRequest = ChairRequest(0.0, 0.0,  "Fox", 2, 4)
         var file = generateStringFromResource(EndPoints.saveChair)
-        var query = GraphQlQuery(file, Variables(chair))
+        var query = GraphQlQuery(file, Variables(chairRequest))
 
-        requestWithoutStatusCode(query).prettyPrint()
+        val id = getIdFromResponse(requestWithoutStatusCode(query).prettyPrint())
 
         file = generateStringFromResource(EndPoints.deleteChair)
-        query = GraphQlQuery(file, Variables(chair.id))
+        query = GraphQlQuery(file, Variables(id))
 
         request(query).prettyPrint()
     }
 
     @Test
     fun deleteTable_SuccessPath_TableDeletedAndReturnedCorrectStatusCode() {
-        val table = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
+        val tableRequest = TableRequest(0.0, 0.0, "Fox", 1, 2, "red")
         var file = generateStringFromResource(EndPoints.saveTable)
-        var query = GraphQlQuery(file, Variables(table))
+        var query = GraphQlQuery(file, Variables(tableRequest))
 
-        requestWithoutStatusCode(query).prettyPrint()
+        val id = getIdFromResponse(requestWithoutStatusCode(query).prettyPrint())
 
         file = generateStringFromResource(EndPoints.deleteTable)
-        query = GraphQlQuery(file, Variables(table.id))
+        query = GraphQlQuery(file, Variables(id))
 
         request(query).prettyPrint()
     }
 
     @Test
     fun deleteWall_SuccessPath_WallDeletedAndReturnedCorrectStatusCode() {
-        val wall = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
+        val wallRequest = WallRequest(0.0, 0.0, "Fox", 4, 5)
         var file = generateStringFromResource(EndPoints.saveWall)
-        var query = GraphQlQuery(file, Variables(wall))
+        var query = GraphQlQuery(file, Variables(wallRequest))
 
-        requestWithoutStatusCode(query).prettyPrint()
+        val id = getIdFromResponse(requestWithoutStatusCode(query).prettyPrint())
 
         file = generateStringFromResource(EndPoints.deleteWall)
-        query = GraphQlQuery(file, Variables(wall.id))
+        query = GraphQlQuery(file, Variables(id))
 
         request(query).prettyPrint()
     }
 
     @Test
     fun getChairById_SuccessPath_ChairFoundAndReturnedCorrectStatusCode() {
-        val chair = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
+        val chairRequest = ChairRequest(0.0, 0.0, "Fox", 2, 4)
         var file = generateStringFromResource(EndPoints.saveChair)
-        var query = GraphQlQuery(file, Variables(chair))
+        var query = GraphQlQuery(file, Variables(chairRequest))
 
-        requestWithoutStatusCode(query).prettyPrint()
+        val id = getIdFromResponse(requestWithoutStatusCode(query).prettyPrint())
 
         file = generateStringFromResource(EndPoints.chairById)
-        query = GraphQlQuery(file, Variables(chair.id))
+        query = GraphQlQuery(file, Variables(id))
 
         request(query).prettyPrint()
     }
 
     @Test
     fun getTableById_SuccessPath_TableFoundAndReturnedCorrectStatusCode() {
-        val table = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
+        val tableRequest = TableRequest(0.0, 0.0, "Fox", 1, 2, "red")
         var file = generateStringFromResource(EndPoints.saveTable)
-        var query = GraphQlQuery(file, Variables(table))
+        var query = GraphQlQuery(file, Variables(tableRequest))
 
-        requestWithoutStatusCode(query).prettyPrint()
+        val id = getIdFromResponse(requestWithoutStatusCode(query).prettyPrint())
 
         file = generateStringFromResource(EndPoints.tableById)
-        query = GraphQlQuery(file, Variables(table.id))
+        query = GraphQlQuery(file, Variables(id))
 
         request(query).prettyPrint()
     }
 
     @Test
     fun getWallById_SuccessPath_WallFoundAndReturnedCorrectStatusCode() {
-        val wall = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
+        val wallRequest = WallRequest(0.0, 0.0, "Fox", 4, 5)
         var file = generateStringFromResource(EndPoints.saveWall)
-        var query = GraphQlQuery(file, Variables(wall))
+        var query = GraphQlQuery(file, Variables(wallRequest))
 
-        requestWithoutStatusCode(query).prettyPrint()
+        val id = getIdFromResponse(requestWithoutStatusCode(query).prettyPrint())
 
         file = generateStringFromResource(EndPoints.wallById)
-        query = GraphQlQuery(file, Variables(wall.id))
+        query = GraphQlQuery(file, Variables(id))
 
         request(query).prettyPrint()
     }

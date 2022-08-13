@@ -1,9 +1,7 @@
 package map
 
 import map.controllers.MapController
-import map.dto.ChairDto
-import map.dto.TableDto
-import map.dto.WallDto
+import map.dto.*
 import map.exensions.toChair
 import map.exensions.toTable
 import map.exensions.toWall
@@ -18,17 +16,18 @@ import java.util.*
 class MapControllerTests {
     private val _mapService = mock<IMapService>()
     private val _mapController = MapController(_mapService)
+    private val _defaultId = UUID.fromString("00000000-0000-0000-0000-000000000000")
 
     @Test
     fun saveChair_SuccessPath_SaveChairInMapServiceIsCalledAndReturnsCorrespondingChair() {
         // ARRANGE
-        val chairDto = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
-        val chair = chairDto.toChair()
+        val chairRequest = ChairRequest(0.0, 0.0, "Fox", 2, 4)
+        val chair = chairRequest.toChair()
 
         whenever(_mapService.saveChair(chair)).thenReturn(chair)
 
         // ACT
-        _mapController.saveChair(chairDto)
+        _mapController.saveChair(chairRequest)
 
         // ASSERT
         verify(_mapService, times(1)).saveChair(chair)
@@ -37,13 +36,13 @@ class MapControllerTests {
     @Test
     fun saveTable_SuccessPath_SaveTableInMapServiceIsCalledAndReturnsCorrespondingTable() {
         // ARRANGE
-        val tableDto = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
-        val table = tableDto.toTable()
+        val tableRequest = TableRequest(0.0, 0.0, "Fox", 1, 2, "red")
+        val table = tableRequest.toTable()
 
         whenever(_mapService.saveTable(table)).thenReturn(table)
 
         // ACT
-        _mapController.saveTable(tableDto)
+        _mapController.saveTable(tableRequest)
 
         // ASSERT
         verify(_mapService, times(1)).saveTable(table)
@@ -52,13 +51,13 @@ class MapControllerTests {
     @Test
     fun saveWall_SuccessPath_SaveWallInMapServiceIsCalled() {
         // ARRANGE
-        val wallDto = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
-        val wall = wallDto.toWall()
+        val wallRequest = WallRequest(0.0, 0.0, "Fox", 4, 5)
+        val wall = wallRequest.toWall()
 
         whenever(_mapService.saveWall(wall)).thenReturn(wall)
 
         // ACT
-        _mapController.saveWall(wallDto)
+        _mapController.saveWall(wallRequest)
 
         // ASSERT
         verify(_mapService, times(1)).saveWall(wall)
@@ -67,121 +66,97 @@ class MapControllerTests {
     @Test
     fun deleteChair_SuccessPath_DeleteChairInMapServiceIsCalled() {
         // ARRANGE
-        val firstChairDto = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
-        val secondChairDto = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 5, 10)
+        val chairRequest = ChairRequest(0.0, 0.0, "Fox", 2, 4)
+        val chair = chairRequest.toChair()
 
-        val firstChair = firstChairDto.toChair()
-        val secondChair = secondChairDto.toChair()
-
-        whenever(_mapService.saveChair(firstChair)).thenReturn(firstChair)
-        whenever(_mapService.saveChair(secondChair)).thenReturn(secondChair)
-        whenever(_mapService.deleteChairById(secondChair.id)).thenReturn(secondChair)
+        whenever(_mapService.deleteChairById(_defaultId)).thenReturn(chair)
 
         // ACT
-        _mapController.saveChair(firstChairDto)
-        _mapController.saveChair(secondChairDto)
-        _mapController.deleteChair(secondChairDto.id)
+        _mapController.deleteChair(_defaultId)
 
         // ASSERT
-        verify(_mapService, times(0)).deleteChairById(firstChairDto.id)
-        verify(_mapService, times(1)).deleteChairById(secondChairDto.id)
+        verify(_mapService, times(1)).deleteChairById(_defaultId)
     }
 
     @Test
     fun deleteTable_SuccessPath_DeleteTableInMapServiceIsCalled() {
         // ARRANGE
-        val firstTableDto = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
-        val secondTableDto = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 5, 10, "red")
+        val tableRequest = TableRequest(0.0, 0.0, "Fox", 1, 2, "red")
+        val table = tableRequest.toTable()
 
-        val firstTable = firstTableDto.toTable()
-        val secondTable = secondTableDto.toTable()
-
-        whenever(_mapService.saveTable(firstTable)).thenReturn(firstTable)
-        whenever(_mapService.saveTable(secondTable)).thenReturn(secondTable)
-        whenever(_mapService.deleteTableById(secondTable.id)).thenReturn(secondTable)
+        whenever(_mapService.deleteTableById(_defaultId)).thenReturn(table)
 
         // ACT
-        _mapController.saveTable(firstTableDto)
-        _mapController.saveTable(secondTableDto)
-        _mapController.deleteTable(secondTableDto.id)
+        _mapController.deleteTable(_defaultId)
 
         // ASSERT
-        verify(_mapService, times(0)).deleteTableById(firstTableDto.id)
-        verify(_mapService, times(1)).deleteTableById(secondTableDto.id)
+        verify(_mapService, times(1)).deleteTableById(_defaultId)
     }
 
     @Test
     fun deleteWall_SuccessPath_DeleteWallInMapServiceIsCalled() {
         // ARRANGE
-        val firstWallDto = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
-        val secondWallDto = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 10, 20)
+        val wallRequest = WallRequest(0.0, 0.0, "Fox", 4, 5)
+        val wall = wallRequest.toWall()
 
-        val firstWall = firstWallDto.toWall()
-        val secondWall = secondWallDto.toWall()
-
-        whenever(_mapService.saveWall(firstWall)).thenReturn(firstWall)
-        whenever(_mapService.saveWall(secondWall)).thenReturn(secondWall)
-        whenever(_mapService.deleteWallById(secondWall.id)).thenReturn(secondWall)
+        whenever(_mapService.deleteWallById(_defaultId)).thenReturn(wall)
 
         // ACT
-        _mapController.saveWall(firstWallDto)
-        _mapController.saveWall(secondWallDto)
-        _mapController.deleteWall(secondWallDto.id)
+        _mapController.deleteWall(_defaultId)
 
         // ASSERT
-        verify(_mapService, times(0)).deleteWallById(firstWallDto.id)
-        verify(_mapService, times(1)).deleteWallById(secondWallDto.id)
+        verify(_mapService, times(1)).deleteWallById(_defaultId)
     }
 
     @Test
     fun getChairById_SuccessPath_GetChairByIdInMapServiceIsCalledAndReturnsCorrespondingChair() {
         // ARRANGE
-        val chairDto = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
+        val chairRequest = ChairRequest(0.0, 0.0, "Fox", 2, 4)
 
-        whenever(_mapService.getChairById(chairDto.id)).thenReturn(chairDto.toChair())
+        whenever(_mapService.getChairById(_defaultId)).thenReturn(chairRequest.toChair())
 
         // ACT
-        _mapController.getChair(chairDto.id)
+        _mapController.getChair(_defaultId)
 
         // ASSERT
-        verify(_mapService, times(1)).getChairById(chairDto.id)
+        verify(_mapService, times(1)).getChairById(_defaultId)
     }
 
     @Test
     fun getTableById_SuccessPath_GetTableByIdInMapServiceIsCalledAndReturnsCorrespondingTable() {
         // ARRANGE
-        val tableDto = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
+        val tableRequest = TableRequest(0.0, 0.0, "Fox", 1, 2, "red")
 
-        whenever(_mapService.getTableById(tableDto.id)).thenReturn(tableDto.toTable())
+        whenever(_mapService.getTableById(_defaultId)).thenReturn(tableRequest.toTable())
 
         // ACT
-        _mapController.getTable(tableDto.id)
+        _mapController.getTable(_defaultId)
 
         // ASSERT
-        verify(_mapService, times(1)).getTableById(tableDto.id)
+        verify(_mapService, times(1)).getTableById(_defaultId)
     }
 
     @Test
     fun getWallById_SuccessPath_GetWallByIdInMapServiceIsCalledAndReturnsCorrespondingWall() {
         // ARRANGE
-        val wallDto = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
+        val wallRequest = WallRequest(0.0, 0.0, "Fox", 4, 5)
 
-        whenever(_mapService.getWallById(wallDto.id)).thenReturn(wallDto.toWall())
+        whenever(_mapService.getWallById(_defaultId)).thenReturn(wallRequest.toWall())
 
         // ACT
-        _mapController.getWall(wallDto.id)
+        _mapController.getWall(_defaultId)
 
         // ASSERT
-        verify(_mapService, times(1)).getWallById(wallDto.id)
+        verify(_mapService, times(1)).getWallById(_defaultId)
     }
 
     @Test
     fun getAllChairs_SuccessPath_GetAllChairsInMapServiceIsCalled() {
         // ARRANGE
-        val firstChairDto = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 2, 4)
-        val secondChairDto = ChairDto(0.0, 0.0, UUID.randomUUID(), "Fox", 5, 10)
+        val firstChairRequest = ChairRequest(0.0, 0.0, "Fox", 2, 4)
+        val secondChairRequest = ChairRequest(0.0, 0.0, "Fox", 5, 10)
 
-        whenever(_mapService.getAllChairs()).thenReturn(listOf(firstChairDto.toChair(), secondChairDto.toChair()))
+        whenever(_mapService.getAllChairs()).thenReturn(listOf(firstChairRequest.toChair(), secondChairRequest.toChair()))
 
         // ACT
         _mapController.getChairs()
@@ -193,10 +168,10 @@ class MapControllerTests {
     @Test
     fun getAllTables_SuccessPath_GetAllTablesInMapServiceIsCalled() {
         // ARRANGE
-        val firstTableDto = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 1, 2, "red")
-        val secondTableDto = TableDto(0.0, 0.0, UUID.randomUUID(), "Fox", 5, 10, "red")
+        val firstTableRequest = TableRequest(0.0, 0.0, "Fox", 1, 2, "red")
+        val secondTableRequest = TableRequest(0.0, 0.0, "Fox", 5, 10, "red")
 
-        whenever(_mapService.getAllTables()).thenReturn(listOf(firstTableDto.toTable(), secondTableDto.toTable()))
+        whenever(_mapService.getAllTables()).thenReturn(listOf(firstTableRequest.toTable(), secondTableRequest.toTable()))
 
         // ACT
         _mapController.getTables()
@@ -208,10 +183,10 @@ class MapControllerTests {
     @Test
     fun getAllWalls_SuccessPath_GetAllWallsInMapServiceIsCalled() {
         // ARRANGE
-        val firstWallDto = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 4, 5)
-        val secondWallDto = WallDto(0.0, 0.0, UUID.randomUUID(), "Fox", 10, 20)
+        val firstWallRequest = WallRequest(0.0, 0.0, "Fox", 4, 5)
+        val secondWallRequest = WallRequest(0.0, 0.0, "Fox", 10, 20)
 
-        whenever(_mapService.getAllWalls()).thenReturn(listOf(firstWallDto.toWall(), secondWallDto.toWall()))
+        whenever(_mapService.getAllWalls()).thenReturn(listOf(firstWallRequest.toWall(), secondWallRequest.toWall()))
 
         // ACT
         _mapController.getWalls()
