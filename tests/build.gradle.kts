@@ -13,6 +13,7 @@ dependencies {
     implementation("io.quarkus:quarkus-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.quarkus:quarkus-arc")
+    implementation("com.google.code.gson:gson")
 
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
