@@ -11,14 +11,20 @@ import javax.enterprise.context.ApplicationScoped
 @ApplicationScoped
 class MapService(private val _repository: IMapRepository) : IMapService {
     override fun saveTable(table: Table): Table {
+        table.id = UUID.randomUUID()
+
         return _repository.saveTable(table)
     }
 
     override fun saveChair(chair: Chair): Chair {
+        chair.id = UUID.randomUUID()
+
         return _repository.saveChair(chair)
     }
 
     override fun saveWall(wall: Wall): Wall {
+        wall.id = UUID.randomUUID()
+
         return _repository.saveWall(wall)
     }
 

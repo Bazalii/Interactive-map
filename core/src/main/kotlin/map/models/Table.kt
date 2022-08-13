@@ -5,7 +5,7 @@ import java.util.*
 data class Table(
     val coordinateX: Double,
     val coordinateY: Double,
-    val id: UUID,
+    var id: UUID = UUID.fromString("00000000-0000-0000-0000-000000000000"),
     val creator: String,
     val length: Int,
     val width: Int,
