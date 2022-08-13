@@ -1,7 +1,6 @@
-input WallDtoInput {
+input WallRequestInput {
     coordinateX: Float
     coordinateY: Float
-    id: ID
     creator: String
     length: Int
     width: Int

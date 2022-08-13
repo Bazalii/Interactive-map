@@ -1,9 +1,8 @@
-type TableDto {
+type ChairResponse {
     coordinateX: Float
     coordinateY: Float
     id: ID
     creator: String
-    length: Int
-    width: Int
-    color: String
+    height: Int
+    legsAmount: Int
 }

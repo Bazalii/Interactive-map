@@ -1,8 +1,8 @@
 type Mutation {
-    saveChair(chairDto: ChairDtoInput!): ChairDto!
-    saveTable(tableDto: TableDtoInput!): TableDto!
-    saveWall(wallDto: WallDtoInput!): WallDto!
-    deleteChair(id: String!): ChairDto!
-    deleteTable(id: String!): TableDto!
-    deleteWall(id: String!): WallDto!
+    saveChair(chairRequest: ChairRequestInput!): ChairResponse!
+    saveTable(tableRequest: TableRequestInput!): TableResponse!
+    saveWall(wallRequest: WallRequestInput!): WallResponse!
+    deleteChair(id: String!): ChairResponse!
+    deleteTable(id: String!): TableResponse!
+    deleteWall(id: String!): WallResponse!
 }

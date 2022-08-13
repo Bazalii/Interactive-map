@@ -1,7 +1,6 @@
-type ChairDto {
+input ChairRequestInput {
     coordinateX: Float
     coordinateY: Float
-    id: ID
     creator: String
     height: Int
     legsAmount: Int
