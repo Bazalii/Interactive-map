@@ -1,14 +1,14 @@
 package map.exensions
 
-import map.dto.WallDto
-import map.models.Wall
+import map.dto.TableRequest
+import map.models.Table
 
-fun WallDto.toWall() =
-    Wall(
+fun TableRequest.toTable() =
+    Table(
         coordinateX = coordinateX,
         coordinateY = coordinateY,
-        id = id,
         creator = creator,
         length = length,
         width = width,
+        color = color,
     )

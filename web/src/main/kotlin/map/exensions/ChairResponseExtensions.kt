@@ -1,10 +1,10 @@
 package map.exensions
 
-import map.dto.ChairDto
+import map.dto.ChairResponse
 import map.models.Chair
 
-fun ChairDto.toChair() =
-    Chair(
+fun Chair.toChairResponse() =
+    ChairResponse(
         coordinateX = coordinateX,
         coordinateY = coordinateY,
         id = id,

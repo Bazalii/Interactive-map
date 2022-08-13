@@ -1,10 +1,10 @@
 package map.exensions
 
-import map.dto.TableDto
+import map.dto.TableResponse
 import map.models.Table
 
-fun TableDto.toTable() =
-    Table(
+fun Table.toTableResponse() =
+    TableResponse(
         coordinateX = coordinateX,
         coordinateY = coordinateY,
         id = id,

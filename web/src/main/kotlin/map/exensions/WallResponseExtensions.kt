@@ -1,10 +1,10 @@
 package map.exensions
 
-import map.dto.WallDto
+import map.dto.WallResponse
 import map.models.Wall
 
-fun Wall.toWallDto() =
-    WallDto(
+fun Wall.toWallResponse() =
+    WallResponse(
         coordinateX = coordinateX,
         coordinateY = coordinateY,
         id = id,
