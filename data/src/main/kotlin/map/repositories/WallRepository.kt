@@ -10,16 +10,22 @@ import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class WallRepository : PanacheRepository<WallDbModel> {
-    fun save(wall: Wall) {
+    fun save(wall: Wall): Wall {
         persist(wall.toWallDbModel())
+
+        return getById(wall.id)
     }
 
     fun getById(id: UUID): Wall {
         return list("id", id).first().toWall()
     }
 
-    fun deleteById(id: UUID) {
-        delete("id", getById(id))
+    fun deleteById(id: UUID): Wall {
+        val wall = getById(id)
+
+        delete("id", id)
+
+        return wall
     }
 
     fun getAll(): List<Wall> {

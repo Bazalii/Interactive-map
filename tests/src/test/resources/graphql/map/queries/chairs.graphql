@@ -1,0 +1,10 @@
+query chairs {
+    chairs {
+        coordinateX
+        coordinateY
+        id
+        creator
+        height
+        legsAmount
+    }
+}

@@ -1,6 +1,5 @@
 package map
 
-import io.quarkus.test.junit.QuarkusTest
 import map.models.Chair
 import map.models.Table
 import map.models.Wall
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.mockito.kotlin.*
 import java.util.*
 
-@QuarkusTest
 class MapServiceTests {
     private val _mapRepository = mock<IMapRepository>()
     private val _mapService = MapService(_mapRepository)

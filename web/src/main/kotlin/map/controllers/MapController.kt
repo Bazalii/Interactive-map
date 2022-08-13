@@ -1,73 +1,95 @@
 package map.controllers
 
-import map.models.Chair
-import map.models.Table
-import map.models.Wall
+import map.dto.*
+import map.exensions.*
 import map.services.IMapService
 import org.eclipse.microprofile.graphql.GraphQLApi
 import org.eclipse.microprofile.graphql.Mutation
 import org.eclipse.microprofile.graphql.Query
-import java.util.UUID
+import java.util.*
+import javax.enterprise.context.RequestScoped
 
 @GraphQLApi
+@RequestScoped
 class MapController(private val _mapService: IMapService) {
     @Mutation
-    fun saveTable(table: Table) {
-        _mapService.saveTable(table)
+    fun saveTable(tableRequest: TableRequest): TableResponse {
+        return _mapService.saveTable(tableRequest.toTable()).toTableResponse()
     }
 
     @Mutation
-    fun saveChair(chair: Chair) {
-        _mapService.saveChair(chair)
+    fun saveChair(chairRequest: ChairRequest): ChairResponse {
+        return _mapService.saveChair(chairRequest.toChair()).toChairResponse()
     }
 
     @Mutation
-    fun saveWall(wall: Wall) {
-        _mapService.saveWall(wall)
+    fun saveWall(wallRequest: WallRequest): WallResponse {
+        return _mapService.saveWall(wallRequest.toWall()).toWallResponse()
     }
 
     @Mutation
-    fun deleteTable(id: UUID) {
-        _mapService.deleteTableById(id)
+    fun deleteTable(id: UUID): TableResponse {
+        return _mapService.deleteTableById(id).toTableResponse()
     }
 
     @Mutation
-    fun deleteChair(id: UUID) {
-        _mapService.deleteChairById(id)
+    fun deleteChair(id: UUID): ChairResponse {
+        return _mapService.deleteChairById(id).toChairResponse()
     }
 
     @Mutation
-    fun deleteWall(id: UUID) {
-        _mapService.deleteWallById(id)
+    fun deleteWall(id: UUID): WallResponse {
+        return _mapService.deleteWallById(id).toWallResponse()
     }
 
     @Query
-    fun getTable(id: UUID): Table {
-        return _mapService.getTableById(id)
+    fun getTable(id: UUID): TableResponse {
+        return _mapService.getTableById(id).toTableResponse()
     }
 
     @Query
-    fun getChair(id: UUID): Chair {
-        return _mapService.getChairById(id)
+    fun getChair(id: UUID): ChairResponse {
+        return _mapService.getChairById(id).toChairResponse()
     }
 
     @Query
-    fun getWall(id: UUID): Wall {
-        return _mapService.getWallById(id)
+    fun getWall(id: UUID): WallResponse {
+        return _mapService.getWallById(id).toWallResponse()
     }
 
     @Query
-    fun getTables() : List<Table> {
-        return _mapService.getAllTables()
+    fun getTables(): List<TableResponse> {
+        val tables = _mapService.getAllTables()
+        val tablesDto = mutableListOf<TableResponse>()
+
+        for (table in tables){
+            tablesDto.add(table.toTableResponse())
+        }
+
+        return tablesDto
     }
 
     @Query
-    fun getChairs() : List<Chair> {
-        return _mapService.getAllChairs()
+    fun getChairs(): List<ChairResponse> {
+        val chairs = _mapService.getAllChairs()
+        val chairsDto = mutableListOf<ChairResponse>()
+
+        for (chair in chairs){
+            chairsDto.add(chair.toChairResponse())
+        }
+
+        return chairsDto
     }
 
     @Query
-    fun getWalls() : List<Wall> {
-        return _mapService.getAllWalls()
+    fun getWalls(): List<WallResponse> {
+        val walls = _mapService.getAllWalls()
+        val wallsDto = mutableListOf<WallResponse>()
+
+        for (wall in walls){
+            wallsDto.add(wall.toWallResponse())
+        }
+
+        return wallsDto
     }
 }

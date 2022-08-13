@@ -1,0 +1,7 @@
+input WallRequestInput {
+    coordinateX: Float
+    coordinateY: Float
+    creator: String
+    length: Int
+    width: Int
+}

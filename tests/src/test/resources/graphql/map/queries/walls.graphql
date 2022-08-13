@@ -1,0 +1,10 @@
+query walls {
+    walls {
+        coordinateX
+        coordinateY
+        id
+        creator
+        length
+        width
+    }
+}

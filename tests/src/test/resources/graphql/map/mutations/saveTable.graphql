@@ -1,0 +1,11 @@
+mutation saveTable($tableRequest: TableRequestInput!) {
+    saveTable(tableRequest: $tableRequest) {
+        coordinateX
+        coordinateY
+        id
+        creator
+        length
+        width
+        color
+    }
+}

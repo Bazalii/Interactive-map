@@ -5,37 +5,39 @@ import map.models.Table
 import map.models.Wall
 import map.repositories.IMapRepository
 import map.services.IMapService
-import java.util.UUID
+import java.util.*
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
-class MapService (
-    private val _repository: IMapRepository,
-        ) : IMapService {
+class MapService(private val _repository: IMapRepository) : IMapService {
+    override fun saveTable(table: Table): Table {
+        table.id = UUID.randomUUID()
 
-
-    override fun saveTable(table: Table) {
-        _repository.saveTable(table)
+        return _repository.saveTable(table)
     }
 
-    override fun saveChair(chair: Chair) {
-        _repository.saveChair(chair)
+    override fun saveChair(chair: Chair): Chair {
+        chair.id = UUID.randomUUID()
+
+        return _repository.saveChair(chair)
     }
 
-    override fun saveWall(wall: Wall) {
-        _repository.saveWall(wall)
+    override fun saveWall(wall: Wall): Wall {
+        wall.id = UUID.randomUUID()
+
+        return _repository.saveWall(wall)
     }
 
-    override fun deleteTableById(id: UUID) {
-        _repository.deleteTableById(id)
+    override fun deleteTableById(id: UUID): Table {
+        return _repository.deleteTableById(id)
     }
 
-    override fun deleteChairById(id: UUID) {
-        _repository.deleteChairById(id)
+    override fun deleteChairById(id: UUID): Chair {
+        return _repository.deleteChairById(id)
     }
 
-    override fun deleteWallById(id: UUID) {
-        _repository.deleteWallById(id)
+    override fun deleteWallById(id: UUID): Wall {
+        return _repository.deleteWallById(id)
     }
 
     override fun getTableById(id: UUID): Table {

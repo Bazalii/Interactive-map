@@ -1,0 +1,11 @@
+query tableById($id: String!) {
+    table(id: $id) {
+        coordinateX
+        coordinateY
+        id
+        creator
+        length
+        width
+        color
+    }
+}

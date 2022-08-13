@@ -10,16 +10,22 @@ import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class TableRepository : PanacheRepository<TableDbModel> {
-    fun save(table: Table) {
+    fun save(table: Table): Table {
         persist(table.toTableDbModel())
+
+        return getById(table.id)
     }
 
     fun getById(id: UUID): Table {
         return list("id", id).first().toTable()
     }
 
-    fun deleteById(id: UUID) {
-        delete("id", getById(id))
+    fun deleteById(id: UUID): Table {
+        val table = getById(id)
+
+        delete("id", id)
+
+        return table
     }
 
     fun getAll(): List<Table> {

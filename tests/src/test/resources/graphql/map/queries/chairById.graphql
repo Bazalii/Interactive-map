@@ -1,0 +1,10 @@
+query chairById($id: String!) {
+    chair(id: $id) {
+        coordinateX
+        coordinateY
+        id
+        creator
+        height
+        legsAmount
+    }
+}

@@ -1,6 +1,5 @@
 package map
 
-import io.quarkus.test.junit.QuarkusTest
 import map.models.Chair
 import map.models.Table
 import map.models.Wall
@@ -10,10 +9,12 @@ import map.repositories.TableRepository
 import map.repositories.WallRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.mockito.kotlin.*
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.times
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import java.util.*
 
-@QuarkusTest
 class MapRepositoryTests {
     private val chairRepository: ChairRepository = mock()
     private val tableRepository: TableRepository = mock()
@@ -80,7 +81,7 @@ class MapRepositoryTests {
     }
 
     @Test
-    fun deleteTable_SuccessPath_DeleteInPanacheRepositoryIsCalled()  {
+    fun deleteTable_SuccessPath_DeleteInPanacheRepositoryIsCalled() {
         // ARRANGE
         val table = Table(0.0, 0.0, UUID.randomUUID(), "tima", 1, 2, "red")
 

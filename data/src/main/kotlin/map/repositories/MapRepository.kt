@@ -1,8 +1,11 @@
 package map.repositories
 
-import map.models.*
+import map.models.Chair
+import map.models.Table
+import map.models.Wall
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
+import javax.transaction.Transactional
 
 @ApplicationScoped
 class MapRepository(
@@ -10,27 +13,33 @@ class MapRepository(
     private val _wallRepository: WallRepository,
     private val _tableRepository: TableRepository,
 ) : IMapRepository {
-    override fun saveTable(table: Table) {
-        _tableRepository.save(table)
+    @Transactional
+    override fun saveTable(table: Table): Table {
+        return _tableRepository.save(table)
     }
 
-    override fun saveChair(chair: Chair) {
-        _chairRepository.save(chair)
+    @Transactional
+    override fun saveChair(chair: Chair): Chair {
+        return _chairRepository.save(chair)
     }
 
-    override fun saveWall(wall: Wall) {
-        _wallRepository.save(wall)
+    @Transactional
+    override fun saveWall(wall: Wall): Wall {
+        return _wallRepository.save(wall)
     }
 
-    override fun deleteTableById(id: UUID) {
+    @Transactional
+    override fun deleteTableById(id: UUID): Table {
         return _tableRepository.deleteById(id)
     }
 
-    override fun deleteChairById(id: UUID) {
+    @Transactional
+    override fun deleteChairById(id: UUID): Chair {
         return _chairRepository.deleteById(id)
     }
 
-    override fun deleteWallById(id: UUID) {
+    @Transactional
+    override fun deleteWallById(id: UUID): Wall {
         return _wallRepository.deleteById(id)
     }
 

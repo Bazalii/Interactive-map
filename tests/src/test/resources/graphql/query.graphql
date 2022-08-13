@@ -1,0 +1,8 @@
+type Query {
+    chair(id: String!): ChairResponse!
+    table(id: String!): TableResponse!
+    wall(id: String!): WallResponse!
+    chairs: ChairResponse!
+    tables: TableResponse!
+    walls: WallResponse!
+}

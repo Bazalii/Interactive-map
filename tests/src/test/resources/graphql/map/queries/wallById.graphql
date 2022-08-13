@@ -1,0 +1,10 @@
+query wallById($id: String!) {
+    wall(id: $id) {
+        coordinateX
+        coordinateY
+        id
+        creator
+        length
+        width
+    }
+}
