@@ -10,7 +10,7 @@ services:
     environment:
       POSTGRES_DB: map
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 777
+      POSTGRES_PASSWORD: postgres
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -d map -U postgres" ]
       interval: 5s
